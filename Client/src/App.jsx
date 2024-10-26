@@ -1,17 +1,25 @@
 import { useState, useEffect } from 'react';
 import axios from "axios";
+import Header from './components/Header';
+import Hotel from "./components/Hotel";
 
 function App() {
   // -------- Getting Data from The Backend --------
   const [listOfHotels, setListOfHotels] = useState([]);
+  const [hotelsPrices, setHotelsPrices] = useState([]);
 
-  // Getting Task and Todos
+  // Getting hotels and it's prices
   const fetchApi = async () => {
     try {
-      const response = await axios.get("http://localhost:3000/hotels");
-      setListOfHotels(response.data);
-      console.log(response.data);
+      const hotels_temp = await axios.get("http://localhost:3000/hotels");
+      const prices_temp = await axios.get("http://localhost:3000/prices")
+      var hotels = hotels_temp.data.rows;
+      var prices = prices_temp.data.rows;
+      setListOfHotels(hotels);
+      setHotelsPrices(prices);
 
+      console.log(hotels);
+      console.log(prices);
     } catch (error) {
       console.error('Error fetching data:', error);
     }
@@ -21,36 +29,43 @@ function App() {
     fetchApi();
   }, []);  // Runs once on mount
 
+
+
   return (
     <div>
-      <h1>List of Hotels</h1>
 
-      <table border="1">
-        <thead>
-          <tr>
-            <th>Id</th>
-            <th>Hotels</th>
-            <th>Price</th>
-            <th>City</th>
-          </tr>
-        </thead>
-        <tbody>
-          {listOfHotels.length > 0 ? (
-            listOfHotels.map((hotel, index) => (
-              <tr key={index}>
-                <td>{hotel.id}</td>
-                <td>{hotel.hotel_name}</td>
-                <td>{hotel.price}</td> 
-                <td>{hotel.city}</td>
-              </tr>
-            ))
-          ) : (
-            <tr>
-              <td colSpan="4">No hotels found</td>
-            </tr>
-          )}
-        </tbody>
-      </table>
+      <Header />
+
+
+      {
+        listOfHotels.map(hotel => {
+          let lowest_price = 0;
+          let highest_price = 0;
+
+          hotelsPrices.forEach(currentPrice => {
+            if (currentPrice.hotel_id === hotel.hotel_id) {
+              if (currentPrice.double < lowest_price || lowest_price === 0) {
+                lowest_price = currentPrice.double;
+              }
+
+              if (currentPrice.quad > highest_price || highest_price === 0) {
+                highest_price = currentPrice.quad;
+              }
+            }
+          });
+
+          return (
+            <Hotel
+              key={hotel.hotel_id}  // Add a unique key for each element in lists
+              hotelName={hotel.hotel_name}
+              image={hotel.image}
+              lowestPrice={lowest_price}
+              highestPrice={highest_price}
+            />
+          );
+        })
+      }
+
     </div>
   );
 }

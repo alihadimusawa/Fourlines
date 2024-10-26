@@ -22,7 +22,7 @@ const port = 3000;
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-let tasks = await db.query("SELECT * FROM hotels");
+let tasks = await db.query("SELECT * FROM prices");
     
 tasks = tasks.rows;
 
@@ -30,15 +30,14 @@ console.log(tasks);
 
 
 app.get("/hotels", async (req, res) => {
-    let tasks = await db.query("SELECT * FROM hotels");
-    
-    tasks = tasks.rows;
-
-    console.log(tasks);
-
-    res.json(tasks);
-
+    let hotels = await db.query("SELECT * FROM hotels");
+    res.send(hotels);
 });
+
+app.get("/prices", async (req,res) => {
+    let prices = await db.query("SELECT * FROM prices");
+    res.send(prices);
+})
 
 
 app.listen(port, () => {
