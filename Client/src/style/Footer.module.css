@@ -1,0 +1,14 @@
+.footer {
+    background-color: gray;
+    width: 100%;
+    font-size: 2vw;
+    height: 20vh;
+    display: flex;
+    align-items: center; /* Center vertically */
+    justify-content: center; /* Center horizontally */
+    margin-top: 10vh;
+}
+
+h1 {
+    margin: 0; /* Remove default margin */
+}

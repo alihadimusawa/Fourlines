@@ -1,0 +1,31 @@
+img {
+    width: 30vw;
+    height: 15vw; 
+    object-fit: cover;
+    overflow: hidden; 
+    border: 1px solid black;
+    border-radius: 10px;
+}
+
+#hotel{
+    display: flex;
+    gap: 1vw;
+    width: 80%;
+    margin: auto;
+    margin-bottom: 10vh;
+}
+
+.hotel_right_container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 90%;
+}
+
+.hotel_right_container h1{
+    cursor: pointer;
+}
+.hotel_right_container h1:hover{
+    color: red;
+}
+
