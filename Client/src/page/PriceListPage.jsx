@@ -37,8 +37,8 @@ function PriceListPage() {
 
 
     // -------- Setting for pagination --------
-    const [currentPage, setCurrentPage] = useState(2);
-    const [postPerPage, setPostPerPage] = useState(1);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [postPerPage, setPostPerPage] = useState(2);
 
 
     const lastPostIndex = currentPage * postPerPage;
@@ -64,7 +64,7 @@ function PriceListPage() {
               }
 
               if (currentPrice.quad > highest_price || highest_price === 0) {
-                highest_price = currentPrice.quad;
+                highest_price = currentPrice.quint;
               }
             }
           });

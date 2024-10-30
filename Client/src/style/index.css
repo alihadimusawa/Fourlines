@@ -14,3 +14,39 @@
 }
 
 button{cursor: pointer;}
+
+/* ------- Dropwdown ------- */
+.dropdown{
+    display: inline-block;
+}
+.dropdown button{
+    width: 10vw !important;
+    background-color: hsl(0, 0%, 0%);
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2vw !important;
+}
+.dropdown p{
+    display: block;
+    color: black;   
+    padding: 10px 15px;
+}
+.dropdown .content{
+    display: none;
+    position: absolute;
+    width: inherit;
+    background-color: hsl(0, 0%, 95%);
+    min-width: 100px;
+    box-shadow: 2px 2px 5px hsla(0, 0%, 0%, 0.8);
+}
+.dropdown:hover .content{
+    display: block;
+}
+.dropdown:hover button{
+    background-color: hsl(0, 0%, 70%);
+}
+.dropdown p:hover{
+    background-color: hsl(0, 0%, 90%);
+}

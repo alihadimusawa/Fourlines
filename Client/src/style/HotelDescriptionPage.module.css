@@ -1,0 +1,91 @@
+.page{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 4%;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    gap: 2vw;
+}
+
+.page *{
+    display: flex;
+    flex-direction: column;
+
+    pad: 0;
+}
+
+#top, #bottom{
+    flex-direction: row;
+    width: 100%;
+    justify-content: center;
+}
+
+#top img{
+    width: 50vw;
+    height: auto;
+}
+
+#middle{
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-around;
+}
+
+
+/* Price */
+.priceContainer{
+    flex-direction: row;
+    gap: 4vw;
+}
+
+#price{
+    font-size: 3vw;
+    margin-bottom: 1vw;
+    margin-right: auto;
+}
+
+.price h5{
+    font-size: 2vw;
+    font-weight: 500;
+    margin: 0;
+}
+
+.price p{
+    font-size: 1.5vw;
+    margin: 0;
+}
+
+
+/* Benefit */
+.benefitContainer{
+    flex-direction: row;
+    gap: 10vw;
+}
+
+.hotelBenefit h5{
+    font-size: 2vw;
+    font-weight: 1000;
+    margin-bottom: 0;
+}
+
+.hotelBenefit{
+    width: 15vw;
+}
+
+
+/* Button */
+.page button{
+    width: 20%;
+    text-align: center;
+    font-size: 2vw;
+    display: flex;
+    flex-direction: center;
+    border-radius: 10px;
+    align-items: center;
+}
+
+.page button:hover{
+    border-radius: 0px;
+}
