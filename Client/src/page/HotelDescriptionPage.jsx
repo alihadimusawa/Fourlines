@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import PriceContainer from "../components/priceContainer";
@@ -6,11 +6,20 @@ import HotelBenefitsContainer from "../components/HotelBenefitsContainer";
 import HotelStyling from "../style/HotelDescriptionPage.module.css";
 import CustomDropdown from "../components/CustomDropdown";
 
-function HotelDescriptionPage() {
+// --------- Material UI ---------
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment'
+import dayjs from "dayjs";
 
+
+function HotelDescriptionPage() {
 
     // ---------- Getting hotel from the server ----------
     const { hotel_id } = useParams();
+
+    // this is the variable to store all the hotel prices that we get from the backend
     const [hotel, setHotel] = useState(null);
 
     async function gethotelsById(hotel_id) {
@@ -25,26 +34,103 @@ function HotelDescriptionPage() {
 
     // ---------- Get the price to be displayed on the website  ----------
     const [priceId, setPriceId] = useState("0");
+    const [userDate, setUserDate] = useState(dayjs("00/00/0000"));
 
-    function changePriceId(id) {
-        setPriceId(id);
-        console.log("price Id changed  ", id);
+    // function to convert a string formatted like this 30-12-2024 to a Date object
+    function convertToDate(dateString) {
+        const parts = dateString.split("-");
+        const day = parseInt(parts[0], 10);
+        const month = parseInt(parts[1], 10) - 1;
+        const year = parseInt(parts[2], 10);
+
+        const dateObject = new Date(year, month, day);
+        return dateObject;
     }
 
     // Step by step
-    // 1. Dropdown display all the price period
-    // 2. after clicking the period, it will set the priceId by that period
-    // 3. map the hotel and if the price id matches the priceId that we get
-    // 4. pass all the price into the price container
+    // 1. get the selected date from the user
+    // 2. store it inside the userDate
+    // 3. seek for the price that matches the selected date
+    // 4. after it was found, take the id and store it in the price id
+    // 5. it will automatically be rendered in the pricelist
 
-
+    // to check if the website is in the first render
+    const isFirstRender = useRef(true);
 
     useEffect(() => {
         gethotelsById(hotel_id);
     }, [hotel_id]);
 
+    useEffect(()=> {
+
+        if(isFirstRender.current){
+            isFirstRender.current = false;
+            return;   
+        }
+
+        // Convert the current User Date that we got from the material UI to a regular Date object
+        let day = userDate.$D;
+        let month = userDate.$M;
+        month += 1;
+        
+        let year = userDate.$y;
+        // to get the current year
+        let currentDate = new Date();
+        let currentYear = currentDate.getFullYear();
+        
+        if(currentYear != year) {
+            year = 1001;
+            console.log("not the same")
+        }else{
+            year = 1000;
+        }
+
+        console.log("program year = " + year);
+        
+        let newUser = day+"-"+month+"-"+year;
+        newUser = convertToDate(newUser);
+        console.log(newUser);
+
+        hotel && hotel.forEach((current) => {
+            let mulaiDate = convertToDate(current.mulai);
+            let akhirDate = convertToDate(current.akhir);
+            if (newUser >= mulaiDate && newUser <= akhirDate) {
+                setPriceId(current.price_id);
+            }
+
+            // console.log("mulaiDate");
+            // console.log(mulaiDate);
+            // console.log("\n");
+            // console.log("akhir date");
+            // console.log(akhirDate);
+            // console.log("\n");
+            // console.log("user date");
+            // console.log(newUser);
+            // console.log("\n");
+            
+            
+            if(newUser < mulaiDate){
+                console.log("user date dipilih sebelum mulai date");
+                console.log(mulaiDate);
+                console.log(newUser);
+                console.log("\n");
+            } 
+            
+            if(newUser > akhirDate){
+                console.log("user date dipilih setelah akhir date");
+                console.log(akhirDate);
+                console.log("\n");
+            }
+
+
+        });
+        
+    }, [userDate]);
+
+
     return (
         <div>
+
             {hotel ? (
                 <div className={HotelStyling.page}>
 
@@ -78,15 +164,39 @@ function HotelDescriptionPage() {
 
                         }
 
-                        <CustomDropdown
-                            title="Pilih tanggal"
-                            hotel={hotel}
-                            changePrice={changePriceId}
-                        />
+                        {/* DatePicker */}
+                        <div className={HotelStyling.exceptional}>
+                            <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                <DatePicker
+                                    value={userDate}
+                                    onChange={(newValue) => {
+                                        let day = dayjs(newValue.$D);
+                                        let month = dayjs(newValue.$M);
+                                        let year =  dayjs(newValue.$y);
+                                        let tempDate = new Date(year, month, day);
+                                        newValue && setUserDate(dayjs(tempDate));
+                                    }}
+                                sx={{
+                                    height: {
+                                        xs: 0, //0
+                                        sm: 0, //600
+                                        md: 0, //900
+                                        lg: 0, //1200
+                                        xl: 0, //1536
+                                    },
+                                    width: {
+                                        xs: 90, //0
+                                        sm: 180, //600
+                                        md: 260, //900
+                                        lg: 320, //1200
+                                        xl: 400, //1536
+                                    }
+                                }}
+                                />
+                            </LocalizationProvider>
+                        </div>
+
                     </div>
-
-
-
 
                     {/* BOTTOM */}
                     <div id={HotelStyling.bottom}>
@@ -101,7 +211,7 @@ function HotelDescriptionPage() {
                     <button>
                         <a href="https://wa.me/6287771878828?text=Hello%20there!">
                             Request
-                        </a>    
+                        </a>
                     </button>
                 </div>
             ) : (

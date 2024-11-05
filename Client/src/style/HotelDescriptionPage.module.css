@@ -12,8 +12,10 @@
 .page *{
     display: flex;
     flex-direction: column;
+}
 
-    pad: 0;
+.exceptional *{
+    flex-direction: row;
 }
 
 #top, #bottom{
@@ -34,10 +36,12 @@
 }
 
 
+
 /* Price */
 .priceContainer{
     flex-direction: row;
     gap: 4vw;
+    width: 10%;
 }
 
 #price{

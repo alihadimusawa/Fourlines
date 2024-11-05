@@ -18,13 +18,13 @@ function PriceListPage() {
       var hotels = hotels_temp.data.rows;
       var prices = prices_temp.data.rows;
 
-      console.log(hotels_temp.data);
-      console.log(hotels);
+      // console.log(hotels_temp.data);
+      // console.log(hotels);
       setListOfHotels(hotels);
       setHotelsPrices(prices);
 
-      console.log(hotels);
-      console.log(prices);
+      // console.log(hotels);
+      // console.log(prices);
     } catch (error) {
       console.error('Error fetching data:', error);
     }
