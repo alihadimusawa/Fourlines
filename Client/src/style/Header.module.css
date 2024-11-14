@@ -1,19 +1,120 @@
-body {
-    padding: 0;
+.header, .header *{
+    display: flex;
     margin: 0;
+    padding: 0;
+    text-decoration: none;
 }
 
-.header {
-    background-color: gray;
+.header{
+
+    justify-content: center;
+    align-items: center;
     width: 100%;
-    font-size: 2vw;
-    height: 20vh;
-    display: flex;
-    align-items: center; /* Center vertically */
-    justify-content: center; /* Center horizontally */
+    height: 10vh;
+    background-color: #252B69;
     margin-bottom: 10vh;
 }
 
-h1 {
-    margin: 0; /* Remove default margin */
+.right{
+
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 50%;
+    height: 100%;
+}
+
+.right > a {
+
+    justify-content: center;
+    align-items: center;
+}
+
+a {
+    color: white;
+    font-weight: 900;
+    padding: 10px;
+    height: 70%;
+    width: 7.5vw;
+    background: linear-gradient(to right, transparent 50%, white 50%);
+    background-size: 200% 100%;
+    transition: background-position 0.3s ease, color 0.5s ease;
+}
+
+a:hover {
+
+    color: #252B69;
+    background-position: -100% 0;
+}
+
+.dropdowns{
+    visibility: hidden ;
+    position: absolute;
+    flex-direction: column;
+    background-color: #252B69;
+    top: 4.5vw;
+    left: 68.76vw;
+    width: 20vw;
+    height: 20vh;
+}
+
+.dropdowns a{
+    width: 100%;
+    align-items: center;
+}
+
+.dropdowns p{
+    margin-left: 2vw;
+}
+
+#hotel:hover .dropdowns{
+
+    justify-content: center;
+    align-items: center;
+    visibility: visible;
+}
+
+header{
+
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+    justify-content: space-between !important;
+    height: 100%;
+}
+
+.header img{
+
+    justify-content: center;
+    align-items: center;
+    width: 20vw;
+    height: auto;
+    border: none;
+}
+
+.sidedowns{
+    visibility: hidden ;
+    background-color: #252B69;
+    position: absolute;
+    left: -20vw;
+    flex-direction: column;
+    top: 6.66vh;
+    width: 20vw;
+    flex-direction: column;
+}
+
+
+#allotment:hover .sidedowns{
+    visibility: visible;
+}
+
+.sidedowns *{
+    align-items: center;
+    height: 3.7vw;
+}
+
+.sidedowns p{
+    margin-left: 2vw;
 }

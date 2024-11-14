@@ -1,14 +1,44 @@
 .footer {
-    background-color: gray;
+    background-color: #252B69;
     width: 100%;
-    font-size: 2vw;
-    height: 20vh;
-    display: flex;
-    align-items: center; /* Center vertically */
-    justify-content: center; /* Center horizontally */
     margin-top: 10vh;
+    height: 30vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
 }
 
-h1 {
-    margin: 0; /* Remove default margin */
+.footer img{
+    width: 15vw;
+    height: auto;
+    border: none;
+    align-self: flex-start;
+}
+
+.footer > div{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding-top: 2.5vh;
+    width: 80%;
+}
+
+.info{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center !important;
+    color: white;
+    width: 15vw;
+    text-align: center;
+}
+
+.info *{
+    margin: 0.7vh;
+}
+
+.footer p{
+    font-weight: 100;
+    color: #DADADA;
 }

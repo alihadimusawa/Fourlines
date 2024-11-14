@@ -36,21 +36,38 @@ function PriceListPage() {
 
 
 
-    // -------- Setting for pagination --------
-    const [currentPage, setCurrentPage] = useState(1);
-    const [postPerPage, setPostPerPage] = useState(2);
+  // -------- Setting for pagination --------
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postPerPage, setPostPerPage] = useState(2);
 
 
-    const lastPostIndex = currentPage * postPerPage;
-    const firstPostIndex = lastPostIndex - postPerPage;
+  const lastPostIndex = currentPage * postPerPage;
+  const firstPostIndex = lastPostIndex - postPerPage;
 
-    const currentPost = listOfHotels.slice(firstPostIndex, lastPostIndex);
+  const currentPost = listOfHotels.slice(firstPostIndex, lastPostIndex);
 
 
 
   return (
     <div>
+      
+      <div className="categoryContainer">
+        <div>
+          Price List
+        </div>
 
+        <div>
+          Allotment
+        </div>
+
+        <div>
+          Special Price
+        </div>
+      </div>
+
+      <button className='searchButton' aria-placeholder='Search...'>
+          <img src="http://localhost:3000/Icon/arrowRightIcon.png" alt="" />
+      </button>
 
       {
         currentPost.map(hotel => {
@@ -76,16 +93,19 @@ function PriceListPage() {
               image={hotel.image}
               lowestPrice={lowest_price}
               highestPrice={highest_price}
-              hotel_id = {hotel.hotel_id}
+              hotel_id={hotel.hotel_id}
+              rating = {hotel.rating}
+              distance = {hotel.jarak}
+              description = {hotel.description}
             />
           );
         })
       }
       <Pagination
-        totalPost = {listOfHotels.length}
-        postPerPage = {postPerPage}
-        setCurrentPage = {setCurrentPage}
-      /> 
+        totalPost={listOfHotels.length}
+        postPerPage={postPerPage}
+        setCurrentPage={setCurrentPage}
+      />
 
     </div>
   );
