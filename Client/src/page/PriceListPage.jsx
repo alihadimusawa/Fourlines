@@ -1,9 +1,8 @@
 import { useState, useEffect } from 'react';
 import axios from "axios";
-import Header from '../components/Header';
 import Hotel from "../components/Hotel";
-import Footer from "../components/Footer";
 import Pagination from "../components/Pagination";
+import PriceListStyling from "../style/Price.module.css";
 
 function PriceListPage() {
   // -------- Getting Data from The Backend --------
@@ -49,9 +48,9 @@ function PriceListPage() {
 
 
   return (
-    <div>
-      
-      <div className="categoryContainer">
+    <div className='content' id={PriceListStyling.price}>
+
+      <div className={PriceListStyling.categoryContainer}>
         <div>
           Price List
         </div>
@@ -65,9 +64,12 @@ function PriceListPage() {
         </div>
       </div>
 
-      <button className='searchButton' aria-placeholder='Search...'>
-          <img src="http://localhost:3000/Icon/arrowRightIcon.png" alt="" />
-      </button>
+      <div className={PriceListStyling.searchBar}>
+        <input placeholder='Search...' />
+        <img src="http://localhost:3000/Icon/searchIcon.png" alt="" />
+      </div>
+
+
 
       {
         currentPost.map(hotel => {
@@ -94,9 +96,9 @@ function PriceListPage() {
               lowestPrice={lowest_price}
               highestPrice={highest_price}
               hotel_id={hotel.hotel_id}
-              rating = {hotel.rating}
-              distance = {hotel.jarak}
-              description = {hotel.description}
+              rating={hotel.rating}
+              distance={hotel.jarak}
+              description={hotel.description}
             />
           );
         })

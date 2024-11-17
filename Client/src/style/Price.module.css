@@ -1,0 +1,72 @@
+#price{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5vh;
+}
+
+.categoryContainer{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.categoryContainer div {
+    border: 3px solid #252B69;
+    background: linear-gradient(to right, white 50%, #252B69 50%);
+    background-size: 200% 100%;
+    background-position: left;
+    color: #252B69;
+    border-radius: 20px;
+    width: 20%;
+    height: 5vh;
+    font-size: 2vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 300;
+    transition: background-position 0.2s ease, color 0.2s ease;
+}
+
+.categoryContainer div:hover {
+    background-position: right;
+    color: white;
+}
+
+.searchBar{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+    height: 5vh;
+    border: 1px solid #252B69;
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: #252B69;
+}
+
+.searchBar input{
+    width: 90%;
+    height: 100%;
+    padding-left: 2vw;
+    border: none;
+    border-right: 1px solid #252B69;
+}
+
+.searchBar img{
+    width: 2vw;
+    height: auto;
+    border: none;
+    padding-right: 2vw;
+}
+
+/* to remove input focus border on click */
+textarea:focus, input:focus{
+    outline: none;
+}
+
+

@@ -3,6 +3,11 @@ body{
     padding: 0;
 }
 
+.content{
+    padding-left: 5vw;
+    padding-right: 5vw;
+}
+
 .bold{
     font-weight: 900;
 }
