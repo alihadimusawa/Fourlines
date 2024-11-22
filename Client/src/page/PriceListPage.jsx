@@ -3,6 +3,7 @@ import axios from "axios";
 import Hotel from "../components/Hotel";
 import Pagination from "../components/Pagination";
 import PriceListStyling from "../style/Price.module.css";
+import Fuse from "fuse.js"
 
 function PriceListPage() {
   // -------- Getting Data from The Backend --------
@@ -29,11 +30,6 @@ function PriceListPage() {
     }
   };
 
-  useEffect(() => {
-    fetchApi();
-  }, []);  // Runs once on mount
-
-
 
   // -------- Setting for pagination --------
   const [currentPage, setCurrentPage] = useState(1);
@@ -58,6 +54,42 @@ function PriceListPage() {
     setCurrentSort(event.target.innerHTML);
   }
 
+
+
+  // -------- Setting for search algorithm --------
+  const [searchInput, setInput] = useState("");
+  const [searchResult, setSearchResults] = useState([]);
+
+  function changeInput(event) {
+    setInput(event.target.value);
+  }
+
+  useEffect(() => {
+    if(!searchInput || listOfHotels.length <= 0){
+      setSearchResults([]);
+      return;
+    }
+
+    if(listOfHotels.length > 0){
+      const fuse = new Fuse(listOfHotels , {
+        keys:['hotel_name'],
+      })
+  
+      const result = fuse.search(searchInput);
+      console.log(result);
+      setSearchResults(result) 
+    }
+
+  }, [searchInput])
+
+
+  // -------- Done --------
+  useEffect(() => {
+    fetchApi();
+  }, []);  // Runs once on mount
+
+
+
   return (
     <div className='content' id={PriceListStyling.price}>
 
@@ -65,8 +97,10 @@ function PriceListPage() {
 
         {/* Search Button */}
         <div className={PriceListStyling.searchBar}>
-          <input placeholder='Search...' />
-          <img src="http://localhost:3000/Icon/searchIcon.png" alt="" />
+          <input placeholder='Search...' value={searchInput} onChange={() => changeInput(event)} />
+          <div id={PriceListStyling.searchBarRight} onClick={() => setInput("")}>
+            <img src="http://localhost:3000/Icon/searchIcon.png" alt="" id={PriceListStyling.searchImage} />
+          </div>
         </div>
 
         {/* Category */}
@@ -150,7 +184,7 @@ function PriceListPage() {
         })
       }
 
-      
+
       <Pagination
         totalPost={listOfHotels.length}
         postPerPage={postPerPage}

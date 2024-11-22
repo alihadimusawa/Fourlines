@@ -3,6 +3,10 @@ body{
     padding: 0;
 }
 
+body::-webkit-scrollbar {
+    display: none;
+  }
+
 
 * {
   font-family: "Rubik", serif;

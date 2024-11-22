@@ -23,7 +23,7 @@ function Hotel(props) {
                         {props.description.substring(0, 300)}...
                     </p>
 
-                    <button>
+                    <button onClick={() => hotelDescriptionRedirect(props.hotel_id)}>
                         <p>More...</p>
                         <img src="http://localhost:3000/Icon/arrowRightIcon.png" alt="" />
                     </button>

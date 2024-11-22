@@ -23,7 +23,37 @@
     align-items: center;
     height: 100%;
     cursor: pointer;
-    border: 1px solid black;
+}
+
+.categoryDropdowns{
+    position: absolute;
+    top: 25vh;
+    border-radius: 20px;
+    width: 8.8vw;
+    border-top-right-radius: 0px;
+    border-top-left-radius: 0px;
+    overflow: hidden;
+    display: flex;
+    visibility: hidden;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    z-index: 3;
+    border: 1px solid #252B69;
+}
+
+#last{
+    border-bottom: 0px;
+}
+
+.categoryDropdowns *{
+    border: 1px solid #252B69;
+    width: 100%;
+    background-color: white;
+    height: 3.8vh;
+    padding-top: 1vh;
+    transition: background-color 0.2s ease, color 0.3s ease; /* Add a transition for smooth effect */
 }
 
 #category{
@@ -47,6 +77,9 @@
     transition: transform 0.3s ease; /* Add smooth animation */
 }
 
+.categoryContainer:hover .categoryDropdowns{
+    visibility: visible;
+}
 
 .categoryContainer:hover #category{
     border-bottom-left-radius:0px;
@@ -58,11 +91,21 @@
     transition: transform 0.3s ease; /* Add smooth animation */
 }
 
+.categoryDropdowns *:hover{
+    background-color: #252B69;
+    color: white;
+}
+
+
 #last{
     border-bottom-left-radius:10px;
     border-bottom-right-radius:10px;
 }
 
+
+
+
+/* Search Bar */
 .searchBar{
     display: flex;
     flex-direction: row;
@@ -77,18 +120,30 @@
 }
 
 .searchBar input{
-    width: 90%;
+    width: 95%;
     height: 100%;
     padding-left: 2vw;
     border: none;
     border-right: 1px solid #252B69;
 }
 
-.searchBar img{
+#searchBarRight{
+    width: 5%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+#searchBarRight:hover{
+    background-color: #5c619b;
+}
+
+#searchBarRight img{
     width: 1.5vw;
     height: auto;
     border: none;
-    margin: auto;
 }
 
 /* to remove input focus border on click */
