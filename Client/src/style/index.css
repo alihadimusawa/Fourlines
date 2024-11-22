@@ -3,6 +3,13 @@ body{
     padding: 0;
 }
 
+
+* {
+  font-family: "Rubik", serif;
+  font-weight: 0 !important;
+  font-style: normal;
+}
+
 .content{
     padding-left: 5vw;
     padding-right: 5vw;
@@ -57,6 +64,38 @@ button{cursor: pointer;}
 .dropdown:hover button{
     background-color: hsl(0, 0%, 70%);
 }
+
 .dropdown p:hover{
     background-color: hsl(0, 0%, 90%);
+}
+
+
+
+
+/* --------Pagination-------- */
+#pagination {
+    display: flex;
+    flex-wrap: wrap; /* Enable wrapping */
+    width: 100%; /* Ensure it spans the container */
+    gap: 1vw; /* Add spacing between buttons */
+    margin: auto;
+    justify-content: center;
+    margin-right: auto;
+}
+
+#pagination button {
+    text-align: center;
+    width: 3vw;
+    height: 6vh;
+    background-color: white;
+    border: 1px solid #252B69;
+    color: #252B69;
+    font-weight: 500;
+    font-size: 1.5vw;
+    border-radius: 10px;
+}
+
+#pagination button:hover{
+    background-color: #252B69;
+    color: white;
 }

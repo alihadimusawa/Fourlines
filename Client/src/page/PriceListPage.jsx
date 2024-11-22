@@ -37,8 +37,7 @@ function PriceListPage() {
 
   // -------- Setting for pagination --------
   const [currentPage, setCurrentPage] = useState(1);
-  const [postPerPage, setPostPerPage] = useState(2);
-
+  const [postPerPage, setPostPerPage] = useState(5);
 
   const lastPostIndex = currentPage * postPerPage;
   const firstPostIndex = lastPostIndex - postPerPage;
@@ -47,26 +46,73 @@ function PriceListPage() {
 
 
 
+  // -------- Setting for dropdowns --------
+  const [currentMenu, setCurrentMenu] = useState("Price List");
+  const [currentSort, setCurrentSort] = useState("Sort By")
+
+  function changeMenu(event) {
+    setCurrentMenu(event.target.innerHTML);
+  }
+
+  function changeSort(event) {
+    setCurrentSort(event.target.innerHTML);
+  }
+
   return (
     <div className='content' id={PriceListStyling.price}>
 
-      <div className={PriceListStyling.categoryContainer}>
-        <div>
-          Price List
+      <div className={PriceListStyling.top}>
+
+        {/* Search Button */}
+        <div className={PriceListStyling.searchBar}>
+          <input placeholder='Search...' />
+          <img src="http://localhost:3000/Icon/searchIcon.png" alt="" />
         </div>
 
-        <div>
-          Allotment
+        {/* Category */}
+        <div className={PriceListStyling.categoryContainer}>
+          <div id={PriceListStyling.category}>
+            {currentMenu}
+            <img src="http://localhost:3000/Icon/dropdownIcon.png" alt="" />
+          </div>
+
+          {/* Dropdowns */}
+          <div className={PriceListStyling.categoryDropdowns}>
+            <div onClick={changeMenu}>
+              Price List
+            </div>
+            <div onClick={changeMenu}>
+              Allotment
+            </div>
+            <div onClick={changeMenu} id={PriceListStyling.last}>
+              Special Price
+            </div>
+          </div>
         </div>
 
-        <div>
-          Special Price
-        </div>
-      </div>
 
-      <div className={PriceListStyling.searchBar}>
-        <input placeholder='Search...' />
-        <img src="http://localhost:3000/Icon/searchIcon.png" alt="" />
+        {/* Sort */}
+        <div className={PriceListStyling.categoryContainer}>
+          <div id={PriceListStyling.category}>
+            {currentSort}
+            <img src="http://localhost:3000/Icon/dropdownIcon.png" alt="" />
+          </div>
+
+          {/* Dropdowns */}
+          <div className={PriceListStyling.categoryDropdowns}>
+            <div onClick={changeSort}>
+              Nearest
+            </div>
+            <div onClick={changeSort}>
+              Cheapest
+            </div>
+            <div onClick={changeSort} id={PriceListStyling.last}>
+              Highest
+            </div>
+          </div>
+        </div>
+
+
       </div>
 
 
@@ -103,9 +149,12 @@ function PriceListPage() {
           );
         })
       }
+
+      
       <Pagination
         totalPost={listOfHotels.length}
         postPerPage={postPerPage}
+        currentPage={currentPage}
         setCurrentPage={setCurrentPage}
       />
 

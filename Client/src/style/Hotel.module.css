@@ -1,31 +1,136 @@
-img {
-    width: 30vw;
-    height: 15vw; 
-    object-fit: cover;
-    overflow: hidden; 
-    border: 1px solid black;
-    border-radius: 10px;
-}
-
 #hotel{
     display: flex;
-    gap: 1vw;
-    width: 80%;
-    margin: auto;
-    margin-bottom: 10vh;
+    gap: 0.5vw;
+    width: 100%;
+    margin-bottom: 4vh;
+    border-radius: 10px;
+    height: 40vh;
+    position: relative;
 }
 
+#hotel h1{
+    margin: 0;
+}
+
+.show{
+    width: 92%;
+    display: flex;
+    flex-direction: row;
+    border: 2px solid #252B69;
+    border-radius: 10px;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+}
+
+/* Left */
+
+#hotelImage{
+    width: 35%;
+    height: 100%;
+    border-radius: 8px;
+    border-right: 2px solid #252B69;
+}
+
+
+
+/* Middle */
 .hotel_right_container{
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    width: 90%;
+    justify-content: space-around;
+    align-items: center;
+    width: 55%;
+    height: 100%;
+    padding-right: 3vw;
+    z-index: 1;
 }
+
+.hotel_right_container p{
+    font-weight: 100;
+}
+
 
 .hotel_right_container h1{
     cursor: pointer;
+    font-weight: 500;
+    color: #252B69;
+    text-align: center;
 }
-.hotel_right_container h1:hover{
-    color: red;
+
+.show button{
+    padding-left: 1vw;
+    padding-right: 1vw;
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-color: #252B69;
+    color: white;
+    border: 1px solid #252B69;
+    border-radius: 20px;
+    width: 60%;
+    height: 4.5vh;
+}
+
+.show button img{
+    width: 1.5vw;
+    height: auto;
+    position: relative;
+    left: 6vw;
+    transition: left 0.3s ease-in-out; /* Smooth movement */
+}
+
+/* Right */
+.hotel_right_popup {
+    width: 8%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    border: 2px solid #252B69;
+    background-color: #252B69;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    padding-left: 3vw;
+    z-index: -1;
+
+    margin-left: -12vw;
+    transition: margin-left 0.3s ease-in-out; /* Add smooth transition */
+}
+
+#hotel:hover .hotel_right_popup{
+    margin-left: -4vw;
+}
+
+#hotel:hover img{
+    left: 9vw;
+}
+
+
+.feature{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-weight: 500;
+    color: white;
+}
+
+.feature img{
+    width: 2.5vw !important;
+}
+
+.feature div{
+    margin-top: 0.5vh;
+    font-size: 1vw;
+}
+
+.hotel_right_popup img{
+    width: 2vw;
+    height: auto;
 }
 
