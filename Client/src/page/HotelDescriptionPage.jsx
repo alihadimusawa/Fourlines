@@ -47,13 +47,6 @@ function HotelDescriptionPage() {
         return dateObject;
     }
 
-    // Step by step
-    // 1. get the selected date from the user
-    // 2. store it inside the userDate
-    // 3. seek for the price that matches the selected date
-    // 4. after it was found, take the id and store it in the price id
-    // 5. it will automatically be rendered in the pricelist
-
     // to check if the website is in the first render
     const isFirstRender = useRef(true);
 
@@ -61,33 +54,33 @@ function HotelDescriptionPage() {
         gethotelsById(hotel_id);
     }, [hotel_id]);
 
-    useEffect(()=> {
+    useEffect(() => {
 
-        if(isFirstRender.current){
+        if (isFirstRender.current) {
             isFirstRender.current = false;
-            return;   
+            return;
         }
 
         // Convert the current User Date that we got from the material UI to a regular Date object
         let day = userDate.$D;
         let month = userDate.$M;
         month += 1;
-        
+
         let year = userDate.$y;
         // to get the current year
         let currentDate = new Date();
         let currentYear = currentDate.getFullYear();
-        
-        if(currentYear != year) {
+
+        if (currentYear != year) {
             year = 1001;
             console.log("not the same")
-        }else{
+        } else {
             year = 1000;
         }
 
         console.log("program year = " + year);
-        
-        let newUser = day+"-"+month+"-"+year;
+
+        let newUser = day + "-" + month + "-" + year;
         newUser = convertToDate(newUser);
         console.log(newUser);
 
@@ -107,16 +100,16 @@ function HotelDescriptionPage() {
             // console.log("user date");
             // console.log(newUser);
             // console.log("\n");
-            
-            
-            if(newUser < mulaiDate){
+
+
+            if (newUser < mulaiDate) {
                 console.log("user date dipilih sebelum mulai date");
                 console.log(mulaiDate);
                 console.log(newUser);
                 console.log("\n");
-            } 
-            
-            if(newUser > akhirDate){
+            }
+
+            if (newUser > akhirDate) {
                 console.log("user date dipilih setelah akhir date");
                 console.log(akhirDate);
                 console.log("\n");
@@ -124,8 +117,14 @@ function HotelDescriptionPage() {
 
 
         });
-        
+
     }, [userDate]);
+
+
+
+    // ---------- Get the hotel images  ----------
+    const [hotelImages, setHotelImages] = useState("");
+    
 
 
     return (
@@ -133,6 +132,16 @@ function HotelDescriptionPage() {
 
             {hotel ? (
                 <div className={HotelStyling.page}>
+
+                    {/* -------- TOP -------- */}
+                    <div className={HotelStyling.top}>
+                        <img src="http://localhost:3000/icon/backIcon.png" alt="Back Icon" />
+                        <h1>{hotel[0].hotel_name}</h1>
+                        <div className={HotelStyling.addressContainer}>
+                            <img src="http://localhost:3000/icon/addressIcon.png" alt="Address Icon" />
+                            <p>{hotel[0].address}</p>
+                        </div>
+                    </div>
 
                     {/* TOP */}
                     <div id={HotelStyling.top}>
@@ -172,26 +181,26 @@ function HotelDescriptionPage() {
                                     onChange={(newValue) => {
                                         let day = dayjs(newValue.$D);
                                         let month = dayjs(newValue.$M);
-                                        let year =  dayjs(newValue.$y);
+                                        let year = dayjs(newValue.$y);
                                         let tempDate = new Date(year, month, day);
                                         newValue && setUserDate(dayjs(tempDate));
                                     }}
-                                sx={{
-                                    height: {
-                                        xs: 0, //0
-                                        sm: 0, //600
-                                        md: 0, //900
-                                        lg: 0, //1200
-                                        xl: 0, //1536
-                                    },
-                                    width: {
-                                        xs: 90, //0
-                                        sm: 180, //600
-                                        md: 260, //900
-                                        lg: 320, //1200
-                                        xl: 400, //1536
-                                    }
-                                }}
+                                    sx={{
+                                        height: {
+                                            xs: 0, //0
+                                            sm: 0, //600
+                                            md: 0, //900
+                                            lg: 0, //1200
+                                            xl: 0, //1536
+                                        },
+                                        width: {
+                                            xs: 90, //0
+                                            sm: 180, //600
+                                            md: 260, //900
+                                            lg: 320, //1200
+                                            xl: 400, //1536
+                                        }
+                                    }}
                                 />
                             </LocalizationProvider>
                         </div>

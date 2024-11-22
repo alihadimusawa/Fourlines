@@ -18,13 +18,9 @@ function PriceListPage() {
       var hotels = hotels_temp.data.rows;
       var prices = prices_temp.data.rows;
 
-      // console.log(hotels_temp.data);
-      // console.log(hotels);
       setListOfHotels(hotels);
       setHotelsPrices(prices);
 
-      // console.log(hotels);
-      // console.log(prices);
     } catch (error) {
       console.error('Error fetching data:', error);
     }
@@ -64,21 +60,32 @@ function PriceListPage() {
     setInput(event.target.value);
   }
 
+  function searchClicked() {
+    setListOfHotels(searchResult);
+    console.log("Search button is clicked");
+    console.log(listOfHotels);
+  }
+  
   useEffect(() => {
-    if(!searchInput || listOfHotels.length <= 0){
+    if (!searchInput || listOfHotels.length <= 0) {
       setSearchResults([]);
       return;
     }
+    
+    const fuse = new Fuse(listOfHotels, {
+      keys: ['hotel_name'],
+    })
 
-    if(listOfHotels.length > 0){
-      const fuse = new Fuse(listOfHotels , {
-        keys:['hotel_name'],
-      })
-  
-      const result = fuse.search(searchInput);
-      console.log(result);
-      setSearchResults(result) 
+    const result = fuse.search(searchInput);
+
+    if (listOfHotels.length > 0 && result.length > 0) {
+      const formattedResults = result.map(current => current.item); // Extract relevant items from Fuse.js results
+      setSearchResults(formattedResults); // Update state with processed results
+      
+      console.log("This is the result", formattedResults); // Log the formatted results directly
+      console.log("This is list of hotels", listOfHotels);
     }
+    
 
   }, [searchInput])
 
@@ -98,7 +105,11 @@ function PriceListPage() {
         {/* Search Button */}
         <div className={PriceListStyling.searchBar}>
           <input placeholder='Search...' value={searchInput} onChange={() => changeInput(event)} />
-          <div id={PriceListStyling.searchBarRight} onClick={() => setInput("")}>
+          <div id={PriceListStyling.searchBarRight} onClick={() => {
+              setInput("");
+              searchClicked();
+            }
+          }>
             <img src="http://localhost:3000/Icon/searchIcon.png" alt="" id={PriceListStyling.searchImage} />
           </div>
         </div>

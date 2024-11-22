@@ -42,12 +42,12 @@ app.get('/image/:filename', (req, res) => {
 });
 
 // Get icon
-app.get("/icon/:iconName", (req,res) => {
+app.get("/icon/:iconName", (req, res) => {
     const iconName = req.params.iconName;
     const imagePath = path.join(__dirname, 'public', filename);
     // Send the icon file if it exist
-    res.sendFile(imagePath, (err)=> {
-        if(err){
+    res.sendFile(imagePath, (err) => {
+        if (err) {
             console.error("File not found", err);
             res.status(404).send("Icon not found");
         }
@@ -72,10 +72,18 @@ app.get("/prices", async (req, res) => {
 app.post("/getHotelById/:hotel_id", async (req, res) => {
     const hotel_id = req.params.hotel_id;
     let hotel;
-    
+
     hotel = await db.query(`
         SELECT 
             hotels.hotel_name,
+            hotels.address,
+            hotels.restaurant,
+            hotels.gym,
+            hotels.laundry,
+            hotels.cafe,
+            hotels.wifi,
+            hotels.breakfast,
+            hotels.pool,
             hotels.jarak,
             hotels.rating,
             hotels.kamar,
@@ -95,11 +103,30 @@ app.post("/getHotelById/:hotel_id", async (req, res) => {
         WHERE 
             hotels.hotel_id = $1;              
         `, [hotel_id])
-    
+
     console.log(hotel_id);
     res.send(hotel.rows);
 })
 
 app.listen(port, () => {
     console.log(`App is listening on port ${port}`);
+})
+
+// Get hotel image by id
+app.get("/getHotelImageById/:hotel_id", async (req, res) => {
+    const hotel_id = req.params.hotel_id;
+    let hotel;
+
+    hotel = await db.query(`
+        SELECT 
+            images.image
+        FROM 
+            images
+        JOIN 
+            hotels ON images.hotel_id = hotels.hotel_id
+        WHERE 
+            hotels.hotel_id = $1;`, [hotel_id])
+
+    console.log(hotel_id);
+    res.send(hotel.rows);
 })
