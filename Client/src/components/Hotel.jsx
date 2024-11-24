@@ -7,6 +7,14 @@ function Hotel(props) {
 
     const navigate = useNavigate();
 
+    let distance = props.distance;
+    let km = false;
+    if(distance >= 1000){
+        km = true;
+        distance = distance / 1000;
+    }
+    
+
     function hotelDescriptionRedirect(hotel_id) {
         navigate(`/hotelDescription/${hotel_id}`);
     }
@@ -35,7 +43,7 @@ function Hotel(props) {
                 <div className={HotelStyling.feature}>
                     <img src="http://localhost:3000/icon/makkahIcon.png" alt="" id="icon" />
                     <div>
-                        {props.distance}
+                        {distance} { km ? "km" : "m"}
                     </div>
                 </div>
 
