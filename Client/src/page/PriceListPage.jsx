@@ -20,12 +20,34 @@ function PriceListPage() {
       var hotels = hotels_temp.data.rows;
       var prices = prices_temp.data.rows;
 
+
+      // getting the lowest price and highest price of each hotel
+      hotels = hotels.map(hotel => {
+        let lowest_price = 0;
+        let highest_price = 0;
+
+        prices.forEach(currentPrice => {
+          if (currentPrice.hotel_id === hotel.hotel_id) {
+            if (currentPrice.double < lowest_price || lowest_price == 0) {
+              lowest_price = currentPrice.double;
+            }
+
+            if (currentPrice.quad > highest_price && currentPrice.double != 0) {
+              highest_price = currentPrice.quint;
+            }
+          }
+        });
+
+        return {
+          ...hotel,
+          lowestPrice: lowest_price,
+          highestPrice: highest_price
+        }
+      })
+
       setListOfHotels(hotels);
       setListOfHotelsCopy(hotels);
       setHotelsPrices(prices);
-
-      // testing
-      console.log(hotels);
 
     } catch (error) {
       console.error('Error fetching data:', error);
@@ -49,6 +71,7 @@ function PriceListPage() {
 
   function changeMenu(event) {
     const menu = event.target.innerHTML;
+    setCurrentSort("Sort By");
     let tempHotels = [];
     setCurrentMenu(menu);
 
@@ -60,7 +83,6 @@ function PriceListPage() {
     listOfHotelsCopy.map(hotel => {
       if ((menu == "Special Price" && hotel.special == 'true') || (menu == "Allotment" && hotel.allotment == "true")) {
         tempHotels.push(hotel);
-        console.log("true");
       }
     })
 
@@ -75,43 +97,13 @@ function PriceListPage() {
     const sort = event.target.innerHTML;
     setCurrentSort(sort);
 
+    if (sort == "Sort By") setListOfHotels(listOfHotelsCopy);
     hotelSort(listOfHotels, sort);
   }
-
-  // getting the lowest price and highest price of each hotel
-  function getPrice() {
-    listOfHotelsCopy.map(hotel => {
-      let lowest_price = 0;
-      let highest_price = 0;
-
-      hotelsPrices.forEach(currentPrice => {
-        if (currentPrice.hotel_id === hotel.hotel_id) {
-          if (currentPrice.double < lowest_price) {
-            lowest_price = currentPrice.double;
-          }
-
-          if (currentPrice.quad > highest_price) {
-            highest_price = currentPrice.quint;
-          }
-        }
-      });
-
-      return {
-        ...hotel,
-        lowersPrice: lowest_price,
-        highestPrice, highest_price
-      }
-    })
-
-    setListOfHotelsCopy(updatedHotels);
-  }
-
 
   // perform selection sort
   function hotelSort(tempListOfHotels, sortSelection) {
     let tempHotels = [...tempListOfHotels]; // Create a copy to avoid mutating the original state
-
-    // if(sortSelection == "Cheapest") getPrice();
 
     for (let i = 0; i < tempHotels.length - 1; i++) {
       let minIndex = i; // Assume the current index has the smallest value
@@ -126,8 +118,8 @@ function PriceListPage() {
           if (tempHotels[j].rating > tempHotels[minIndex].rating) {
             minIndex = j;
           }
-        }else if(sortSelection == "Cheapest"){
-          if(tempHotels[j].lowestPrice < tempHotels[minIndex].lowestPrice){
+        } else if (sortSelection == "Cheapest") {
+          if (tempHotels[j].lowestPrice < tempHotels[minIndex].lowestPrice) {
             minIndex = j;
           }
         }
@@ -140,6 +132,8 @@ function PriceListPage() {
         tempHotels[minIndex] = temp;
       }
     }
+
+    setListOfHotels(tempHotels);
   }
 
 
@@ -156,8 +150,6 @@ function PriceListPage() {
 
   function searchClicked() {
     setListOfHotels(searchResult);
-    console.log("Search button is clicked");
-    console.log(listOfHotels);
   }
 
   useEffect(() => {
@@ -203,6 +195,7 @@ function PriceListPage() {
           }>
             <img src="http://localhost:3000/Icon/searchIcon.png" alt="" id={PriceListStyling.searchImage} />
           </div>
+
         </div>
 
         {/* Category */}
