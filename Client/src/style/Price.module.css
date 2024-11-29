@@ -54,6 +54,7 @@
     height: 3.8vh;
     padding-top: 1vh;
     transition: background-color 0.2s ease, color 0.3s ease; /* Add a transition for smooth effect */
+    font-size: 1vw;
 }
 
 #category{

@@ -124,7 +124,7 @@ function HotelDescriptionPage() {
 
     // ---------- Get the hotel images  ----------
     const [hotelImages, setHotelImages] = useState("");
-    
+
 
 
     return (
@@ -143,7 +143,22 @@ function HotelDescriptionPage() {
                         </div>
                     </div>
 
-                    {/* TOP */}
+
+                    {/* -------- Slide Show --------  */}
+                    <div className={HotelStyling.imageCarousel}>
+                        <button> &#8594; </button>
+
+                        <img src="https://letsenhance.io/static/73136da51c245e80edc6ccfe44888a99/1015f/MainBefore.jpg" alt="" />
+                        <img src="https://gratisography.com/wp-content/uploads/2024/10/gratisography-cool-cat-800x525.jpg" alt="" />
+                        <img src="https://plus.unsplash.com/premium_photo-1664474619075-644dd191935f?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8aW1hZ2V8ZW58MHx8MHx8fDA%3D" alt="" />
+
+                        <button> &#8592; </button>
+                    </div>
+
+                    {/* -------- Main Service --------  */}
+                    
+
+
                     <div id={HotelStyling.top}>
                         <img src={hotel[0].image} alt={hotel.hotel_name} />
                     </div>
