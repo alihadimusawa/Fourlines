@@ -16,21 +16,28 @@ import dayjs from "dayjs";
 
 function HotelDescriptionPage() {
 
-    // ---------- Getting hotel from the server ----------
     const { hotel_id } = useParams();
 
-    // this is the variable to store all the hotel prices that we get from the backend
-    const [hotel, setHotel] = useState(null);
+    // ---------- Getting hotel prices from the server ----------
+    const [hotelPrices, setHotelPrices] = useState(null);
 
-    async function gethotelsById(hotel_id) {
+    async function getHotelsPrices(hotel_id) {
         try {
-            const response = await axios.post(`http://localhost:3000/getHotelById/${hotel_id}`);
-            setHotel(response.data);
+            const response = await axios.post(`http://localhost:3000/getHotelPrices/${hotel_id}`);
+            setHotelPrices(response.data);
+
+            // set the hotel distance
+            var distance = response[0].distance;
+            var km = false;
+            if (distance >= 1000) {
+                km = true;
+                distance = distance / 1000;
+            }
+
         } catch (error) {
             console.log(error);
         }
     }
-
 
     // ---------- Get the price to be displayed on the website  ----------
     const [priceId, setPriceId] = useState("0");
@@ -47,20 +54,9 @@ function HotelDescriptionPage() {
         return dateObject;
     }
 
-    // to check if the website is in the first render
-    const isFirstRender = useRef(true);
 
+    // USE EFFECT FOR UPDATING THE PRICE WHENEVER THE USER CHANGE THE DATE
     useEffect(() => {
-        gethotelsById(hotel_id);
-    }, [hotel_id]);
-
-    useEffect(() => {
-
-        if (isFirstRender.current) {
-            isFirstRender.current = false;
-            return;
-        }
-
         // Convert the current User Date that we got from the material UI to a regular Date object
         let day = userDate.$D;
         let month = userDate.$M;
@@ -84,23 +80,12 @@ function HotelDescriptionPage() {
         newUser = convertToDate(newUser);
         console.log(newUser);
 
-        hotel && hotel.forEach((current) => {
+        hotelPrices && hotelPrices.forEach((current) => {
             let mulaiDate = convertToDate(current.mulai);
             let akhirDate = convertToDate(current.akhir);
             if (newUser >= mulaiDate && newUser <= akhirDate) {
                 setPriceId(current.price_id);
             }
-
-            // console.log("mulaiDate");
-            // console.log(mulaiDate);
-            // console.log("\n");
-            // console.log("akhir date");
-            // console.log(akhirDate);
-            // console.log("\n");
-            // console.log("user date");
-            // console.log(newUser);
-            // console.log("\n");
-
 
             if (newUser < mulaiDate) {
                 console.log("user date dipilih sebelum mulai date");
@@ -122,125 +107,139 @@ function HotelDescriptionPage() {
 
 
 
+
     // ---------- Get the hotel images  ----------
-    const [hotelImages, setHotelImages] = useState("");
+    const [hotelImages, setHotelImages] = useState([]);
+
+    async function getHotelsImages(hotel_id) {
+        try {
+            const response = await axios.post(`http://localhost:3000/getHotelImageById/${hotel_id}`)
+            setHotelImages(response.data);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    // USE EFFECT FOR TAKING THE FIRST PRICES, AND IMAGES
+    useEffect(() => {
+        getHotelsPrices(hotel_id);
+        getHotelsImages(hotel_id);
+    }, []);
+
 
 
 
     return (
-        <div>
+        <div className={HotelStyling.page}>
 
-            {hotel ? (
-                <div className={HotelStyling.page}>
-
-                    {/* -------- TOP -------- */}
-                    <div className={HotelStyling.top}>
-                        <img src="http://localhost:3000/icon/backIcon.png" alt="Back Icon" />
-                        <h1>{hotel[0].hotel_name}</h1>
-                        <div className={HotelStyling.addressContainer}>
-                            <img src="http://localhost:3000/icon/addressIcon.png" alt="Address Icon" />
-                            <p>{hotel[0].address}</p>
-                        </div>
-                    </div>
-
-
-                    {/* -------- Slide Show --------  */}
-                    <div className={HotelStyling.imageCarousel}>
-                        <button> &#8594; </button>
-
-                        <img src="https://letsenhance.io/static/73136da51c245e80edc6ccfe44888a99/1015f/MainBefore.jpg" alt="" />
-                        <img src="https://gratisography.com/wp-content/uploads/2024/10/gratisography-cool-cat-800x525.jpg" alt="" />
-                        <img src="https://plus.unsplash.com/premium_photo-1664474619075-644dd191935f?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8aW1hZ2V8ZW58MHx8MHx8fDA%3D" alt="" />
-
-                        <button> &#8592; </button>
-                    </div>
-
-                    {/* -------- Main Service --------  */}
-                    
-
-
-                    <div id={HotelStyling.top}>
-                        <img src={hotel[0].image} alt={hotel.hotel_name} />
-                    </div>
-
-                    <h3 id={HotelStyling.price}>Price</h3>
-                    {/* MIDDLE */}
-                    <div id={HotelStyling.middle}>
-                        {
-                            priceId != "0"
-                                ?
-                                hotel.map((current, index) => (
-                                    current.price_id == priceId &&
-                                    <PriceContainer
-                                        key={index}
-                                        double={current.double}
-                                        triple={current.triple}
-                                        quad={current.quad}
-                                        quint={current.quint}
-                                    />
-                                ))
-                                : <PriceContainer
-                                    double="-"
-                                    triple="-"
-                                    quad="-"
-                                    quint="-"
-                                />
-
-                        }
-
-                        {/* DatePicker */}
-                        <div className={HotelStyling.exceptional}>
-                            <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                <DatePicker
-                                    value={userDate}
-                                    onChange={(newValue) => {
-                                        let day = dayjs(newValue.$D);
-                                        let month = dayjs(newValue.$M);
-                                        let year = dayjs(newValue.$y);
-                                        let tempDate = new Date(year, month, day);
-                                        newValue && setUserDate(dayjs(tempDate));
-                                    }}
-                                    sx={{
-                                        height: {
-                                            xs: 0, //0
-                                            sm: 0, //600
-                                            md: 0, //900
-                                            lg: 0, //1200
-                                            xl: 0, //1536
-                                        },
-                                        width: {
-                                            xs: 90, //0
-                                            sm: 180, //600
-                                            md: 260, //900
-                                            lg: 320, //1200
-                                            xl: 400, //1536
-                                        }
-                                    }}
-                                />
-                            </LocalizationProvider>
-                        </div>
-
-                    </div>
-
-                    {/* BOTTOM */}
-                    <div id={HotelStyling.bottom}>
-                        <HotelBenefitsContainer
-                            rating={hotel[0].rating}
-                            jarak={hotel[0].jarak}
-                            kamar={hotel[0].kamar}
-                            transportasi={hotel[0].transportasi}
-                        />
-                    </div>
-
-                    <button>
-                        <a href="https://wa.me/6287771878828?text=Hello%20there!">
-                            Request
-                        </a>
-                    </button>
+            {/* -------- TOP -------- */}
+            <div className={HotelStyling.top}>
+                <img src="http://localhost:3000/icon/backIcon.png" alt="Back Icon" />
+                <h1>{hotelPrices && hotelPrices[0].hotel_name}</h1>
+                <div className={HotelStyling.addressContainer}>
+                    <img src="http://localhost:3000/icon/addressIcon.png" alt="Address Icon" />
+                    <p>{hotelPrices && hotelPrices[0].address}</p>
                 </div>
-            ) : (
-                <p>Loading...</p>
-            )}
+            </div>
+
+            {/* -------- IMAGE SLIDESHOW -------- */}
+            <div className={HotelStyling.carousel}>
+                <button>«</button>
+
+                {
+                    hotelImages.map((current, index) => (
+                        <img key={index} src={current.image} alt="this is an image" />
+                    ))
+                }
+
+
+                <button>»</button>
+            </div>
+
+
+            {/* -------- MAIN SERVICE CONTAINER -------- */}
+            <div className={HotelStyling.mainServiceContainer}>
+                <img src={"http://localhost:3000/icon/makkahBlueIcon.png"} alt="" />
+                <p>{distance} {km ? "km" : "m"}</p>
+            </div>
+
+
+            {/* -------- PRICES -------- */}
+            <h3 id={HotelStyling.price}>Price</h3>
+            <div id={HotelStyling.middle}>
+                {
+                    priceId != "0"
+                        ?
+                        hotelPrices.map((current, index) => (
+                            current.price_id == priceId &&
+                            <PriceContainer
+                                key={index}
+                                double={current.double}
+                                triple={current.triple}
+                                quad={current.quad}
+                                quint={current.quint}
+                            />
+                        ))
+                        : <PriceContainer
+                            double="-"
+                            triple="-"
+                            quad="-"
+                            quint="-"
+                        />
+
+                }
+
+                {/* DatePicker */}
+                <div className={HotelStyling.exceptional}>
+                    <LocalizationProvider dateAdapter={AdapterDayjs}>
+                        <DatePicker
+                            value={userDate}
+                            onChange={(newValue) => {
+                                let day = dayjs(newValue.$D);
+                                let month = dayjs(newValue.$M);
+                                let year = dayjs(newValue.$y);
+                                let tempDate = new Date(year, month, day);
+                                newValue && setUserDate(dayjs(tempDate));
+                            }}
+                            sx={{
+                                height: {
+                                    xs: 0, //0
+                                    sm: 0, //600
+                                    md: 0, //900
+                                    lg: 0, //1200
+                                    xl: 0, //1536
+                                },
+                                width: {
+                                    xs: 90, //0
+                                    sm: 180, //600
+                                    md: 260, //900
+                                    lg: 320, //1200
+                                    xl: 400, //1536
+                                }
+                            }}
+                        />
+                    </LocalizationProvider>
+                </div>
+
+            </div>
+
+            {/* BOTTOM */}
+            <div id={HotelStyling.bottom}>
+                {hotelPrices &&
+                    <HotelBenefitsContainer
+                        rating={hotelPrices[0].rating}
+                        jarak={hotelPrices[0].jarak}
+                        kamar={hotelPrices[0].kamar}
+                        transportasi={hotelPrices[0].transportasi}
+                    />
+                }
+            </div>
+
+            <button>
+                <a href="https://wa.me/6287771878828?text=Hello%20there!">
+                    Request
+                </a>
+            </button>
         </div>
     );
 }

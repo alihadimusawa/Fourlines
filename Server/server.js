@@ -41,10 +41,12 @@ app.get('/image/:filename', (req, res) => {
     });
 });
 
+
+
 // Get icon
 app.get("/icon/:iconName", (req, res) => {
     const iconName = req.params.iconName;
-    const imagePath = path.join(__dirname, 'public', filename);
+    const imagePath = path.join(__dirname, 'public', iconName);
     // Send the icon file if it exist
     res.sendFile(imagePath, (err) => {
         if (err) {
@@ -54,11 +56,14 @@ app.get("/icon/:iconName", (req, res) => {
     })
 })
 
+
+
 // Get hotels
 app.get("/hotels", async (req, res) => {
     let hotels = await db.query("SELECT * FROM hotels");
     res.send(hotels);
 });
+
 
 
 // Get prices
@@ -68,8 +73,9 @@ app.get("/prices", async (req, res) => {
 })
 
 
-// Get hotel by id
-app.post("/getHotelById/:hotel_id", async (req, res) => {
+
+// Get hotel prices by id
+app.post("/getHotelPrices/:hotel_id", async (req, res) => {
     const hotel_id = req.params.hotel_id;
     let hotel;
 
@@ -104,16 +110,14 @@ app.post("/getHotelById/:hotel_id", async (req, res) => {
             hotels.hotel_id = $1;              
         `, [hotel_id])
 
-    console.log(hotel_id);
+    console.log("hotel prices backend triggerred");
     res.send(hotel.rows);
 })
 
-app.listen(port, () => {
-    console.log(`App is listening on port ${port}`);
-})
 
-// Get hotel image by id
-app.get("/getHotelImageById/:hotel_id", async (req, res) => {
+
+// Get hotel images by id
+app.post("/getHotelImageById/:hotel_id", async (req, res) => {
     const hotel_id = req.params.hotel_id;
     let hotel;
 
@@ -127,6 +131,12 @@ app.get("/getHotelImageById/:hotel_id", async (req, res) => {
         WHERE 
             hotels.hotel_id = $1;`, [hotel_id])
 
-    console.log(hotel_id);
+    console.log("hotel images backend triggerred");
     res.send(hotel.rows);
+})
+
+
+
+app.listen(port, () => {
+    console.log(`App is listening on port ${port}`);
 })
