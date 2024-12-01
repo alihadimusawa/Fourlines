@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import PriceContainer from "../components/priceContainer";
 import HotelBenefitsContainer from "../components/HotelBenefitsContainer";
-import HotelStyling from "../style/HotelDescriptionPage.module.css";
+import styling from "../style/HotelDescriptionPage.module.css";
 import CustomDropdown from "../components/CustomDropdown";
 
 // --------- Material UI ---------
@@ -18,21 +18,55 @@ function HotelDescriptionPage() {
 
     const { hotel_id } = useParams();
 
-    // ---------- Getting hotel prices from the server ----------
+    // ---------- Getting hotel prices and changing some of the attribute from the server ----------
     const [hotelPrices, setHotelPrices] = useState(null);
+    const [hotel, setHotel] = useState(null);
+    const [distance, setDistance] = useState(null);
+    const [km, setKm] = useState(false);
+    const [ratingImage, setRatingImage] = useState([]);
 
     async function getHotelsPrices(hotel_id) {
         try {
             const response = await axios.post(`http://localhost:3000/getHotelPrices/${hotel_id}`);
             setHotelPrices(response.data);
+            setHotel(response.data[0]);
+
+            var tempHotel = response.data[0];
+
+            if(response.data[0].restaurant == "true"){
+                console.log("yes");
+            }else if(response.data[0].restaurant === "true"){
+                console.log("no");
+            }else{
+                console.log("nonono");
+            }
+            console.log("this is the one : ", response.data[0].restaurant);
 
             // set the hotel distance
-            var distance = response[0].distance;
-            var km = false;
-            if (distance >= 1000) {
-                km = true;
-                distance = distance / 1000;
+            if (tempHotel.jarak >= 1000) {
+                setKm(true);
+                console.log("true");
+                tempHotel.jarak = tempHotel.jarak / 1000;
             }
+            setDistance(tempHotel.jarak);
+
+            // get the hotel rating
+            var tempRating = tempHotel.rating;
+            var ratingRemain = 5 - tempRating;
+            while (tempRating > 0.5) {
+                tempRating -= 1;
+                setRatingImage((preValue) => [...preValue, "full"]);
+            }
+
+            if (tempRating % 1 == 0.5) {
+                setRatingImage((preValue) => [...preValue, "half"]);
+                tempRating -= 1;
+            };
+
+            while (ratingRemain > 0.5) {
+                setRatingImage((preValue) => [...preValue, "empty"]);
+                ratingRemain -= 1;
+            };
 
         } catch (error) {
             console.log(error);
@@ -130,20 +164,20 @@ function HotelDescriptionPage() {
 
 
     return (
-        <div className={HotelStyling.page}>
+        <div className={styling.page}>
 
             {/* -------- TOP -------- */}
-            <div className={HotelStyling.top}>
+            <div className={styling.top}>
                 <img src="http://localhost:3000/icon/backIcon.png" alt="Back Icon" />
-                <h1>{hotelPrices && hotelPrices[0].hotel_name}</h1>
-                <div className={HotelStyling.addressContainer}>
+                <h1>{hotel && hotel.hotel_name}</h1>
+                <div className={styling.addressContainer}>
                     <img src="http://localhost:3000/icon/addressIcon.png" alt="Address Icon" />
-                    <p>{hotelPrices && hotelPrices[0].address}</p>
+                    <p>{hotel && hotel.address}</p>
                 </div>
             </div>
 
             {/* -------- IMAGE SLIDESHOW -------- */}
-            <div className={HotelStyling.carousel}>
+            <div className={styling.carousel}>
                 <button>«</button>
 
                 {
@@ -158,15 +192,101 @@ function HotelDescriptionPage() {
 
 
             {/* -------- MAIN SERVICE CONTAINER -------- */}
-            <div className={HotelStyling.mainServiceContainer}>
-                <img src={"http://localhost:3000/icon/makkahBlueIcon.png"} alt="" />
+            <div className={styling.mainServiceContainer}>
+                <img src={"http://localhost:3000/icon/makkahBlueIcon.png"} alt="Makkah Icon" />
                 <p>{distance} {km ? "km" : "m"}</p>
+
+                <img src={"http://localhost:3000/icon/roomIcon.png"} alt="Room Available Icon" />
+                <p>{hotel && hotel.kamar}</p>
+
+                <img src={"http://localhost:3000/icon/shuttleBlueIcon.png"} alt="Shuttle Icon" />
+                <p>{hotel && hotel.transportasi}</p>
+
+                {
+                    ratingImage.length > 0 && ratingImage.map((current, index) => {
+                        if (current == "full") return <img src={"http://localhost:3000/icon/starBlueIcon.png"} alt="Star" key={index} />
+                        else if (current == "half") return <img src={"http://localhost:3000/icon/starHalfIcon.png"} alt="Star half" key={index} />
+                        else if (current == "empty") return <img src={"http://localhost:3000/icon/starWhiteIcon.png"} alt="Star" key={index} />
+                    })
+                }
+                <p>{hotel && hotel.rating}</p>
+            </div>
+
+
+            {/* -------- DESCRIPTION AND SECONDARY SERVICE -------- */}
+            <div className={styling.content}>
+
+                <p className={styling.description}>
+                    {hotel && hotel.description}
+                </p>
+
+                {/* SECONDARY SERVICE CONTAINER */}
+                <div className={styling.secondaryService}>
+                {
+                        hotel && hotel.restaurant == "true" && (
+                            <div>
+                                <img src={"http://localhost:3000/icon/restaurantIcon.png"} alt="restaurant Icon" /> 
+                                <p>Restaurant</p>
+                            </div>
+                        )
+                    }
+                    {
+                        hotel && hotel.gym == "true" && (
+                            <div>
+                                <img src={"http://localhost:3000/icon/gymIcon.png"} alt="Gym Icon" /> 
+                                <p>Gym</p>
+                            </div>
+                        )
+                    }
+                    {
+                        hotel && hotel.laundry == "true" && (
+                            <div>
+                                <img src={"http://localhost:3000/icon/laundryIcon.png"} alt="laundry icon" /> 
+                                <p>Free Laundry</p>
+                            </div>
+                        )
+                    }
+                    {
+                        hotel && hotel.cafe == "true" && (
+                            <div>
+                                <img src={"http://localhost:3000/icon/caffeIcon.png"} alt="caffe Icon" /> 
+                                <p>On Hotel Cafe</p>
+                            </div>
+                        )
+                    }
+                    {
+                        hotel && hotel.Wifi == "true" && (
+                            <div>
+                                <img src={"http://localhost:3000/icon/wifiIcon.png"} alt="Wifi Icon" />
+                                <p>Free Wifi</p>
+                            </div>
+                        )
+                    }
+                    {
+                        hotel && hotel.breakfast == "true" && (
+                            <div>
+                                <img src={"http://localhost:3000/icon/breakfastIcon.png"} alt="Breakfast Icon" /> 
+                                <p>Breakfast</p>
+                            </div>
+                        )
+                    }
+                    {
+                        hotel && hotel.pool == "true" && (
+                            <div>
+                                <img src={"http://localhost:3000/icon/swimmingIcon.png"} alt="Swimming Pool Icon" /> 
+                                <p>Swimming Pool</p>
+                            </div>
+                        )
+                    }
+                    
+                </div>
+
             </div>
 
 
             {/* -------- PRICES -------- */}
-            <h3 id={HotelStyling.price}>Price</h3>
-            <div id={HotelStyling.middle}>
+            <h3 id={styling.price}>Price</h3>
+            <div id={styling.middle}>
                 {
                     priceId != "0"
                         ?
@@ -190,7 +310,7 @@ function HotelDescriptionPage() {
                 }
 
                 {/* DatePicker */}
-                <div className={HotelStyling.exceptional}>
+                <div className={styling.exceptional}>
                     <LocalizationProvider dateAdapter={AdapterDayjs}>
                         <DatePicker
                             value={userDate}
@@ -221,18 +341,6 @@ function HotelDescriptionPage() {
                     </LocalizationProvider>
                 </div>
 
-            </div>
-
-            {/* BOTTOM */}
-            <div id={HotelStyling.bottom}>
-                {hotelPrices &&
-                    <HotelBenefitsContainer
-                        rating={hotelPrices[0].rating}
-                        jarak={hotelPrices[0].jarak}
-                        kamar={hotelPrices[0].kamar}
-                        transportasi={hotelPrices[0].transportasi}
-                    />
-                }
             </div>
 
             <button>

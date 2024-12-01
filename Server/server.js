@@ -86,6 +86,7 @@ app.post("/getHotelPrices/:hotel_id", async (req, res) => {
             hotels.restaurant,
             hotels.gym,
             hotels.laundry,
+            hotels.description,
             hotels.cafe,
             hotels.wifi,
             hotels.breakfast,
