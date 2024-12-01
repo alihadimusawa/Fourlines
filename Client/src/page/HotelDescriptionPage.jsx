@@ -33,15 +33,6 @@ function HotelDescriptionPage() {
 
             var tempHotel = response.data[0];
 
-            if(response.data[0].restaurant == "true"){
-                console.log("yes");
-            }else if(response.data[0].restaurant === "true"){
-                console.log("no");
-            }else{
-                console.log("nonono");
-            }
-            console.log("this is the one : ", response.data[0].restaurant);
-
             // set the hotel distance
             if (tempHotel.jarak >= 1000) {
                 setKm(true);
@@ -144,6 +135,7 @@ function HotelDescriptionPage() {
 
     // ---------- Get the hotel images  ----------
     const [hotelImages, setHotelImages] = useState([]);
+    const [currentImage, setCurrentImage] = useState(0);
 
     async function getHotelsImages(hotel_id) {
         try {
@@ -151,6 +143,37 @@ function HotelDescriptionPage() {
             setHotelImages(response.data);
         } catch (error) {
             console.log(error);
+        }
+    }
+
+    function changeImage(currentImageNumber, choice) {
+        console.log(currentImageNumber);
+        let imageLength = hotelImages.length;
+        if (imageLength > 0) {
+            imageLength -= 1;
+
+            if (choice == "next") {
+                // we are on the last image
+                if (imageLength == currentImageNumber) {
+                    setCurrentImage(0);
+                }
+
+                else {
+                    currentImageNumber += 1;
+                    setCurrentImage(currentImageNumber);
+                }
+            } else if (choice == "prev") {
+                // we are on the first image
+                if (currentImageNumber == 0) {
+                    setCurrentImage(imageLength);
+                }
+
+                else {
+                    currentImageNumber -= 1;
+                    setCurrentImage(currentImageNumber);
+                }
+            }
+
         }
     }
 
@@ -168,64 +191,88 @@ function HotelDescriptionPage() {
 
             {/* -------- TOP -------- */}
             <div className={styling.top}>
-                <img src="http://localhost:3000/icon/backIcon.png" alt="Back Icon" />
+                <div id={styling.topImageContainer}>
+                    <a href="/priceList"><img src="http://localhost:3000/icon/backIcon.png" alt="Back Icon" id={styling.backIcon} /></a>
+                </div>
                 <h1>{hotel && hotel.hotel_name}</h1>
                 <div className={styling.addressContainer}>
-                    <img src="http://localhost:3000/icon/addressIcon.png" alt="Address Icon" />
-                    <p>{hotel && hotel.address}</p>
+                    <div>
+                        <img src="http://localhost:3000/icon/addressIcon.png" alt="Address Icon" id={styling.addressIcon} />
+                        <p>{hotel && hotel.address}</p>
+                    </div>
                 </div>
             </div>
 
             {/* -------- IMAGE SLIDESHOW -------- */}
             <div className={styling.carousel}>
-                <button>«</button>
+                <button id={styling.nextButton} onClick={() => changeImage(currentImage, "prev")}>«</button>
+                <div>
+                    <img src={
 
-                {
-                    hotelImages.map((current, index) => (
-                        <img key={index} src={current.image} alt="this is an image" />
-                    ))
-                }
+                        hotelImages.length > 0
+                            ? hotelImages[currentImage].image
+                            : ""
 
-
-                <button>»</button>
+                    } alt="hotel Image" />
+                </div>
+                <button id={styling.prevButton} onClick={() => changeImage(currentImage, "next")}>»</button>
             </div>
 
 
             {/* -------- MAIN SERVICE CONTAINER -------- */}
             <div className={styling.mainServiceContainer}>
                 <img src={"http://localhost:3000/icon/makkahBlueIcon.png"} alt="Makkah Icon" />
-                <p>{distance} {km ? "km" : "m"}</p>
+                <div>
+                    <p className={styling.brave}>{distance} {km ? "km" : "m"}</p>
+                    <p>From Mecca</p>
+                </div>
+
 
                 <img src={"http://localhost:3000/icon/roomIcon.png"} alt="Room Available Icon" />
-                <p>{hotel && hotel.kamar}</p>
+                <div>
+                    <p className={styling.brave}>{hotel && hotel.kamar} Room</p>
+                    <p>Available</p>
+                </div>
 
-                <img src={"http://localhost:3000/icon/shuttleBlueIcon.png"} alt="Shuttle Icon" />
-                <p>{hotel && hotel.transportasi}</p>
 
-                {
-                    ratingImage.length > 0 && ratingImage.map((current, index) => {
-                        if (current == "full") return <img src={"http://localhost:3000/icon/starBlueIcon.png"} alt="Star" key={index} />
-                        else if (current == "half") return <img src={"http://localhost:3000/icon/starHalfIcon.png"} alt="Star half" key={index} />
-                        else if (current == "empty") return <img src={"http://localhost:3000/icon/starWhiteIcon.png"} alt="Star" key={index} />
-                    })
-                }
-                <p>{hotel && hotel.rating}</p>
+                <img src={"http://localhost:3000/icon/shuttleBlueIcon.png"} alt="Shuttle Icon" id={styling.shuttleBus} />
+                <div>
+                    <p className={styling.brave}>{hotel && hotel.transportasi}</p>
+                    <p>Pick and Drop</p>
+                </div>
+
+                <div className={styling.ratingContainer}>
+                    <p className={styling.brave}>{hotel && hotel.rating}</p>
+                    {
+                        ratingImage.length > 0 && ratingImage.map((current, index) => {
+                            if (current == "full") return <img src={"http://localhost:3000/icon/starBlueIcon.png"} alt="Star" key={index} className={styling.star} />
+                            else if (current == "half") return <img src={"http://localhost:3000/icon/starHalfIcon.png"} alt="Star half" key={index} className={styling.star} />
+                            else if (current == "empty") return <img src={"http://localhost:3000/icon/starWhiteIcon.png"} alt="Star" key={index} className={styling.star} />
+                        })
+                    }
+
+                </div>
             </div>
 
 
             {/* -------- DESCRIPTION AND SECONDARY SERVICE -------- */}
             <div className={styling.content}>
 
-                <p className={styling.description}>
-                    {hotel && hotel.description}
-                </p>
+                {hotel &&
+                    <p
+                        className={styling.description}
+                        dangerouslySetInnerHTML={{ __html: hotel.description.replace(/\n/g, "<br />") }}
+                    />
+                }
+
+
 
                 {/* SECONDARY SERVICE CONTAINER */}
                 <div className={styling.secondaryService}>
-                {
+                    {
                         hotel && hotel.restaurant == "true" && (
                             <div>
-                                <img src={"http://localhost:3000/icon/restaurantIcon.png"} alt="restaurant Icon" /> 
+                                <img src={"http://localhost:3000/icon/restaurantIcon.png"} alt="restaurant Icon" />
                                 <p>Restaurant</p>
                             </div>
                         )
@@ -233,7 +280,7 @@ function HotelDescriptionPage() {
                     {
                         hotel && hotel.gym == "true" && (
                             <div>
-                                <img src={"http://localhost:3000/icon/gymIcon.png"} alt="Gym Icon" /> 
+                                <img src={"http://localhost:3000/icon/gymIcon.png"} alt="Gym Icon" />
                                 <p>Gym</p>
                             </div>
                         )
@@ -241,7 +288,7 @@ function HotelDescriptionPage() {
                     {
                         hotel && hotel.laundry == "true" && (
                             <div>
-                                <img src={"http://localhost:3000/icon/laundryIcon.png"} alt="laundry icon" /> 
+                                <img src={"http://localhost:3000/icon/laundryIcon.png"} alt="laundry icon" />
                                 <p>Free Laundry</p>
                             </div>
                         )
@@ -249,7 +296,7 @@ function HotelDescriptionPage() {
                     {
                         hotel && hotel.cafe == "true" && (
                             <div>
-                                <img src={"http://localhost:3000/icon/caffeIcon.png"} alt="caffe Icon" /> 
+                                <img src={"http://localhost:3000/icon/caffeIcon.png"} alt="caffe Icon" />
                                 <p>On Hotel Cafe</p>
                             </div>
                         )
@@ -265,7 +312,7 @@ function HotelDescriptionPage() {
                     {
                         hotel && hotel.breakfast == "true" && (
                             <div>
-                                <img src={"http://localhost:3000/icon/breakfastIcon.png"} alt="Breakfast Icon" /> 
+                                <img src={"http://localhost:3000/icon/breakfastIcon.png"} alt="Breakfast Icon" />
                                 <p>Breakfast</p>
                             </div>
                         )
@@ -273,20 +320,19 @@ function HotelDescriptionPage() {
                     {
                         hotel && hotel.pool == "true" && (
                             <div>
-                                <img src={"http://localhost:3000/icon/swimmingIcon.png"} alt="Swimming Pool Icon" /> 
+                                <img src={"http://localhost:3000/icon/swimmingIcon.png"} alt="Swimming Pool Icon" />
                                 <p>Swimming Pool</p>
                             </div>
                         )
                     }
-                    
+
                 </div>
 
             </div>
 
 
             {/* -------- PRICES -------- */}
-            <h3 id={styling.price}>Price</h3>
-            <div id={styling.middle}>
+            <div id={styling.prices}>
                 {
                     priceId != "0"
                         ?
@@ -321,20 +367,16 @@ function HotelDescriptionPage() {
                                 let tempDate = new Date(year, month, day);
                                 newValue && setUserDate(dayjs(tempDate));
                             }}
+
+                            className={styling.datePicker}
+
                             sx={{
-                                height: {
-                                    xs: 0, //0
-                                    sm: 0, //600
-                                    md: 0, //900
-                                    lg: 0, //1200
-                                    xl: 0, //1536
-                                },
                                 width: {
                                     xs: 90, //0
                                     sm: 180, //600
                                     md: 260, //900
-                                    lg: 320, //1200
-                                    xl: 400, //1536
+                                    lg: 250, //1200
+                                    xl: 320, //1536
                                 }
                             }}
                         />
@@ -343,7 +385,8 @@ function HotelDescriptionPage() {
 
             </div>
 
-            <button>
+            {/* ------- REQUEST BUTTON ------- */}
+            <button className={styling.requestButton}>
                 <a href="https://wa.me/6287771878828?text=Hello%20there!">
                     Request
                 </a>

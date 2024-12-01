@@ -3,92 +3,264 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 4%;
-    padding-top: 0 !important;
-    padding-bottom: 0 !important;
+    margin-left: 5vw;
+    margin-right: 5vw;
     gap: 2vw;
 }
 
 .page *{
-    display: flex;
-    flex-direction: column;
+    margin: 0;
+    padding: 0;
 }
 
-.exceptional *{
-    flex-direction: row;
-}
-
-#top, #bottom{
-    flex-direction: row;
-    width: 100%;
-    justify-content: center;
-}
-
-#top img{
-    width: 50vw;
+.page img{
+    width: 3vw;
     height: auto;
 }
 
-#middle{
-    flex-direction: row;
-    width: 100%;
-    justify-content: space-around;
-}
 
-
-/* Price */
-.priceContainer{
-    flex-direction: row;
-    gap: 4vw;
-    width: 10%;
-}
-
-#price{
-    font-size: 3vw;
-    margin-bottom: 1vw;
-    margin-right: auto;
-}
-
-.price h5{
-    font-size: 2vw;
-    font-weight: 500;
-    margin: 0;
-}
-
-.price p{
-    font-size: 1.5vw;
-    margin: 0;
-}
-
-
-/* Benefit */
-.benefitContainer{
-    flex-direction: row;
-    gap: 10vw;
-}
-
-.hotelBenefit h5{
-    font-size: 2vw;
-    font-weight: 1000;
-    margin-bottom: 0;
-}
-
-.hotelBenefit{
-    width: 15vw;
-}
-
-
-/* Button */
-.page button{
-    width: 20%;
-    text-align: center;
-    font-size: 2vw;
+/* -------TOP------- */
+.top{
     display: flex;
-    flex-direction: center;
-    border-radius: 10px;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.top h1{
+    color: #CF9F51;
+    width: 40%;
+    text-align: center;
+    font-weight: 500;
+}
+
+#topImageContainer {
+    width: 30%;
+    display: flex;
     align-items: center;
 }
 
-.page button:hover{
-    border-radius: 0px;
+#backIcon{
+    border: 2px solid #252B69;
+    border-radius: 50%;
+    padding: 0.5vw;
+    cursor: pointer;
+}
+
+#addressIcon{
+    width: 2vw !important;
+}
+
+.addressContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-end;
+    font-size: 0.8vw;
+    width: 30%;
+    text-align: center;
+}
+
+.addressContainer div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1vw;
+}
+
+.addressContainer p{
+    width: 15vw;
+    font-weight: 500;
+
+}
+
+/* -------IMAGE SLIDESHOW------- */
+.carousel{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid #252B69;
+}
+
+.carousel div{
+    width: 70%;
+    height: 50vh;
+}
+
+.carousel img{
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+
+.carousel button {
+    border: 0px;
+    width: 10vw;
+    height: 50vh;
+    background-color: white;
+    color: #252B69;
+    font-size: 4vw;
+}
+
+
+
+
+/* ------- MAIN SERVICE ------- */
+.mainServiceContainer{
+    width: 95%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2vw;
+    border: 1.5px solid #252B69;
+    border-radius: 10px;
+}
+
+.mainServiceContainer img{
+    width: 4vw;
+}
+
+.mainServiceContainer div:not(.ratingContainer){
+    margin-left: -10vw;
+}
+
+.star{
+    width: 2vw !important;
+}
+
+.brave{
+    font-weight: 600;
+}
+
+.ratingContainer{
+    text-align: center;
+    color: #252B69;
+}
+
+#shuttleBus{
+    width: 3.4vw !important;
+}
+
+
+
+
+/* ------- DESCRIPTION AND SECONDARY SERVICE ------- */
+.content{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding-bottom: 5vh;
+    border-bottom: 3px solid #252B69;
+}
+
+.content > p{
+    width: 82%;
+    font-size: 1.5vw;
+    font-weight: 200;
+    padding-left: 1%;
+}
+
+.secondaryService{
+    padding-top: 3vh;
+    padding-bottom: 3vh;
+    width: 15%;
+    border: 1px solid #252B69;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    gap: 1.5vw;
+}
+
+.secondaryService img{
+    width: 15%;
+}
+
+.secondaryService p{
+    width: 75%;
+    font-weight: 200;
+}
+
+.secondaryService div{
+    width: 90%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    text-align: left;
+}
+
+
+
+
+/* ------- PRICES ------- */
+#prices{
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.priceContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 60%;
+    text-align: center;
+    font-size: 2vw;
+}
+
+.price *{
+    font-weight: 500 !important ;
+}
+
+.datePicker{
+    border-radius: 100px;
+}
+
+.price p{
+    font-size: 1.2vw;
+}
+
+
+
+
+
+/* REQEUST BUTTON */
+.requestButton{
+    width: 20vw;
+    height: 5vw;
+    background-color: #252B69;
+    color: white;
+    font-size: 2vw;
+    border: none;
+    border-radius: 10px;
+    transition: 0.2s;
+}
+
+.requestButton:hover{
+    background-color: white;
+    border: 1px solid #252B69;
+    color: #252B69;
+    transition: 0.2s;
+}
+
+a, a:visited, a:hover, a:active {
+    color: inherit;
+    text-decoration: none;
+    transition: 0.2s;
 }

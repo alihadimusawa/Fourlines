@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import PriceListPage from './page/PriceListPage';
+import AboutUsPage from './page/AboutUsPage';
 import HotelDescriptionPage from './page/HotelDescriptionPage';
 import { BrowserRouter as Router, Routes, Route} from "react-router-dom";
 import Header from './components/Header';
@@ -18,6 +19,7 @@ function App() {
             <Routes>
                 <Route path='/priceList' element={<PriceListPage/>}/>
                 <Route path='/hotelDescription/:hotel_id' element={<HotelDescriptionPage/>}/>
+                <Route path='/aboutUs' element={<AboutUsPage/>}/>
             </Routes>
 
             <Footer/>

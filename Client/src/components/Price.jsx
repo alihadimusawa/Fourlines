@@ -1,10 +1,10 @@
 import React, {useState} from "react";
-import HotelStyling from "../style/HotelDescriptionPage.module.css";
+import styling from "../style/HotelDescriptionPage.module.css";
 
 function Price(props){
 
     return(
-        <div className={HotelStyling.price}>
+        <div className={styling.price}>
             <h5>{props.header}</h5>
             <p>{props.price}</p>
         </div>

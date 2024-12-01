@@ -1,30 +1,29 @@
 import React, { useState } from "react";
 import Price from "./price";
-import HotelStyling from "../style/HotelDescriptionPage.module.css";
+import styling from "../style/HotelDescriptionPage.module.css";
 
 function PriceContainer(props) {
-    const [hotel_id, setHotelId] = useState("");
 
     return (
-        <div className={HotelStyling.priceContainer}>
+        <div className={styling.priceContainer}>
             <Price
                 header="Double"
-                price={props.double}
+                price={props.double ? props.double : "-"}
             />
 
             <Price
                 header="Triple"
-                price={props.triple}
+                price={props.triple ? props.triple : "-"}
             />
 
             <Price
                 header="Quad"
-                price={props.quad}
+                price={props.quad ? props.quad : "-"}
             />
 
             <Price
                 header="Quint"
-                price={props.quint}
+                price={props.quint ? props.quint : "-"}
             />
         </div>
     )

@@ -32,7 +32,7 @@
     align-items: center;
 }
 
-a {
+.header a {
     color: white;
     font-weight: 400;
     padding: 10px;
@@ -43,7 +43,7 @@ a {
     transition: background-position 0.3s ease, color 0.5s ease;
 }
 
-a:hover {
+.header a:hover {
 
     color: #252B69;
     background-position: -100% 0;
