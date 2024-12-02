@@ -191,9 +191,9 @@ function HotelDescriptionPage() {
 
             {/* -------- TOP -------- */}
             <div className={styling.top}>
-                <div id={styling.topImageContainer}>
-                    <a href="/priceList"><img src="http://localhost:3000/icon/backIcon.png" alt="Back Icon" id={styling.backIcon} /></a>
-                </div>
+                <a href="/priceList" id={styling.topImageContainer}>
+                    <img src="http://localhost:3000/icon/backIcon.png" alt="Back Icon" id={styling.backIcon} />
+                </a>
                 <h1>{hotel && hotel.hotel_name}</h1>
                 <div className={styling.addressContainer}>
                     <div>
@@ -205,7 +205,7 @@ function HotelDescriptionPage() {
 
             {/* -------- IMAGE SLIDESHOW -------- */}
             <div className={styling.carousel}>
-                <button id={styling.nextButton} onClick={() => changeImage(currentImage, "prev")}>«</button>
+                <button id={styling.prevButton} onClick={() => changeImage(currentImage, "prev")}>«</button>
                 <div>
                     <img src={
 
@@ -215,7 +215,7 @@ function HotelDescriptionPage() {
 
                     } alt="hotel Image" />
                 </div>
-                <button id={styling.prevButton} onClick={() => changeImage(currentImage, "next")}>»</button>
+                <button id={styling.nextButton} onClick={() => changeImage(currentImage, "next")}>»</button>
             </div>
 
 

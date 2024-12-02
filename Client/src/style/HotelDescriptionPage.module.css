@@ -26,6 +26,7 @@
     justify-content: space-between;
     align-items: center;
     width: 100%;
+    border-bottom: 2px solid #252B69;
 }
 
 .top h1{
@@ -37,15 +38,16 @@
 
 #topImageContainer {
     width: 30%;
-    display: flex;
-    align-items: center;
 }
 
 #backIcon{
-    border: 2px solid #252B69;
-    border-radius: 50%;
     padding: 0.5vw;
     cursor: pointer;
+    transition: 0.5s;
+}
+
+#topImageContainer:hover #backIcon{
+    margin-left: -2vw;
 }
 
 #addressIcon{
@@ -80,36 +82,45 @@
 .carousel{
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    width: 100%;
+    width: 70%;
     border-radius: 10px;
     overflow: hidden;
-    border: 1px solid #252B69;
+    padding-left: 3vw;
+    padding-right: 3vw;
 }
 
 .carousel div{
-    width: 70%;
     height: 50vh;
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;
 }
 
 .carousel img{
-    object-fit: cover;
+    object-fit: contain;
     width: 100%;
     height: 100%;
 }
 
 .carousel button {
     border: 0px;
-    width: 10vw;
-    height: 50vh;
-    background-color: white;
-    color: #252B69;
+    width: 6vw;
+    height: 10vh;
+    background-color: #CF9F51;
+    border-radius: 10px;
+    border: 1px solid white;
+    color: white;
     font-size: 4vw;
+    transition: 0.3s;
+    cursor: pointer;
 }
 
-
-
+.carousel button:hover{
+    font-size: 4.5vw;
+    transition: 0.3s;
+}
 
 /* ------- MAIN SERVICE ------- */
 .mainServiceContainer{
