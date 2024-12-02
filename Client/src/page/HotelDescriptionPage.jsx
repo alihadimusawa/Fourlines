@@ -187,7 +187,7 @@ function HotelDescriptionPage() {
 
 
     return (
-        <div className={styling.page}>
+        <div className={styling.hotelDescriptionPage}>
 
             {/* -------- TOP -------- */}
             <div className={styling.top}>

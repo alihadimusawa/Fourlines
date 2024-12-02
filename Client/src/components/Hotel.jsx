@@ -16,6 +16,7 @@ function Hotel(props) {
     
 
     function hotelDescriptionRedirect(hotel_id) {
+        window.scrollTo(0,0);
         navigate(`/hotelDescription/${hotel_id}`);
     }
 

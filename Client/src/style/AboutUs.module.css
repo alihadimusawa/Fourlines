@@ -1,0 +1,111 @@
+.aboutUs{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 13vw;
+    padding-top: 8vw;
+}
+
+.content{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20vh;
+}
+
+.top{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 10vw;
+}
+
+.topLeft{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.topLeft *{
+    width: 16vw !important;
+    height: auto;
+}
+
+.topRight{
+    font-size: 1.5vw;
+    font-weight: 450;
+    text-align: right;
+    line-height: 1.6;
+}
+
+.justify{
+    text-align: justify;
+    text-justify: inter-word;
+}
+
+.gold{
+    color: #CF9F51;
+}
+
+.aboutUs p:not(.gold, .white){
+    color: #252B69;
+}
+
+
+
+/* MIDDLE */
+.middle{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.middle img{
+    width: 30vw;
+    height: auto;
+}
+
+.middleLeft{
+    text-align: center;
+}
+
+.middleLeft h1{
+    color: #CF9F51;
+}
+
+.middleLeft p{
+    font-size: 1.5vw;
+    line-height: 1.5;
+}
+
+
+
+/* BOTTOM */
+.bottom{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.bottom img{
+    width: 25vw;
+    height: auto;
+}
+
+.bottom p{
+    font-size: 1.7vw;
+    font-weight: 400;
+    line-height: 1.8;
+    width: 60%;
+}
+
+#socialMediaOnAboutUs{
+    margin-top: 10vw;
+    margin-bottom: -10vw;
+}

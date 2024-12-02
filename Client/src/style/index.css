@@ -103,3 +103,51 @@ button{cursor: pointer;}
     background-color: #252B69;
     color: white;
 }
+
+
+
+/* Social Media Container */
+.socialMediaContainer, .socialMediaContainer *{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.socialMediaContainer{
+    width: 55%;
+}
+
+.socialMediaContainer button{
+    border: 0px;
+    width: 10vw;
+    height: 4vw;
+    background-color: white;
+    color: white;
+    border-radius: 200px;
+    font-weight: 500;
+    font-size: 1vw;
+    transition: 0.1s;
+}
+
+.socialMediaContainer button:hover{
+    transition: 0.1s;
+    font-size: 1.3vw;
+}
+
+.socialMediaContainer img{
+    width: 2.5vw;
+    height: auto;
+}
+
+.whatsApp{
+    background-color: #24d366 !important;
+}
+
+.facebook{
+    background-color: #3c5997 !important;
+}
+
+.instagram{
+    background-color: #e53e5f!important;
+}

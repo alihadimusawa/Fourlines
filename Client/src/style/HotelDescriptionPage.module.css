@@ -1,4 +1,4 @@
-.page{
+.hotelDescriptionPage{
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -8,12 +8,12 @@
     gap: 2vw;
 }
 
-.page *{
+.hotelDescriptionPage *{
     margin: 0;
     padding: 0;
 }
 
-.page img{
+.hotelDescriptionPage img{
     width: 3vw;
     height: auto;
 }
@@ -259,7 +259,7 @@
     transition: 0.2s;
 }
 
-a, a:visited, a:hover, a:active {
+.hotelDescriptionPage a, .hotelDescriptionPage a:visited,.hotelDescriptionPage a:hover,.hotelDescriptionPage a:active {
     color: inherit;
     text-decoration: none;
     transition: 0.2s;
