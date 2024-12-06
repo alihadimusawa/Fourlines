@@ -195,7 +195,6 @@ function PriceListPage() {
           }>
             <img src="http://localhost:3000/Icon/searchIcon.png" alt="" id={PriceListStyling.searchImage} />
           </div>
-
         </div>
 
         {/* Category */}

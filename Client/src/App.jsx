@@ -9,6 +9,7 @@ import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
+import ArticlePage from './page/ArticlePage';
 
 function App() {
 
@@ -17,9 +18,10 @@ function App() {
             <Header />
 
             <Routes>
-                <Route path='/priceList' element={<PriceListPage/>}/>
+                <Route path='/Hotels' element={<PriceListPage/>}/>
                 <Route path='/hotelDescription/:hotel_id' element={<HotelDescriptionPage/>}/>
-                <Route path='/aboutUs' element={<AboutUsPage/>}/>
+                <Route path='/AboutUs' element={<AboutUsPage/>} />
+                <Route path='/Articles' element={<ArticlePage/>} />
             </Routes>
 
             <Footer/>
