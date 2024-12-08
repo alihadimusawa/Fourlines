@@ -15,7 +15,7 @@ const db = new pg.Client({
     host: process.env.PG_HOST,
     database: process.env.PG_DATABASE,
     password: process.env.PG_PASSWORD,
-    port: process.env.PG_PORT,    
+    port: process.env.PG_PORT,
     ssl: {
         rejectUnauthorized: false,  // This is important for hosted services like Aiven
     },
@@ -64,6 +64,7 @@ app.get("/icon/:iconName", (req, res) => {
 // Get hotels
 app.get("/hotels", async (req, res) => {
     let hotels = await db.query("SELECT * FROM hotels");
+    console.log("getting all the hotels from the backend is triggered")
     res.send(hotels);
 });
 
@@ -72,6 +73,7 @@ app.get("/hotels", async (req, res) => {
 // Get prices
 app.get("/prices", async (req, res) => {
     let prices = await db.query("SELECT * FROM prices");
+    console.log("hotel prices for particular date in the backend is triggered");
     res.send(prices);
 })
 
@@ -141,11 +143,21 @@ app.post("/getHotelImageById/:hotel_id", async (req, res) => {
 
 
 // Get all of the fourlines article
-app.get("/getArticles", async(req, res) => {
+app.get("/getArticles", async (req, res) => {
     const articles = await db.query(`SELECT * FROM articles;`);
     console.log("articles is fetched");
     res.send(articles.rows);
 });
+
+// get a particular article by id
+app.get("/getArticleById/:articleId", async (req, res) => {
+    const articleId = req.params.articleId;
+    let article = await db.query(`
+        SELECT  * FROM articles WHERE article_id = $1;
+    `, [articleId]);
+    console.log("getting particular article by id from the backend is triggered");
+    res.send(article.rows);
+})
 
 app.listen(port, () => {
     console.log(`App is listening on port ${port}`);

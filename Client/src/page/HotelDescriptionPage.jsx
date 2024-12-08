@@ -191,7 +191,7 @@ function HotelDescriptionPage() {
 
             {/* -------- TOP -------- */}
             <div className={styling.top}>
-                <a href="/priceList" id={styling.topImageContainer}>
+                <a href="/Hotels" id={styling.topImageContainer}>
                     <img src="http://localhost:3000/icon/backIcon.png" alt="Back Icon" id={styling.backIcon} />
                 </a>
                 <h1>{hotel && hotel.hotel_name}</h1>

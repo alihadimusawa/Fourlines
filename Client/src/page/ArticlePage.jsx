@@ -6,6 +6,7 @@ import styling from "../style/ArticlePage.module.css";
 function ArticlePage() {
 
     const [articles, setArticles] = useState();
+    const [onDetail, setOnDetail] = useState(false);
 
     const fetchArticles = async () => {
         const articlesTemp = await axios.get("http://localhost:3000/getArticles");
@@ -33,11 +34,7 @@ function ArticlePage() {
 
 
 
-    // --------- SETTING FOR DROPDOWN ---------
-    const [dropdown, setDropdown] = useState();
-    const [searchVal, setSearch] = useState();
 
-    
 
     useEffect(() => {
         fetchArticles();
@@ -46,22 +43,23 @@ function ArticlePage() {
 
     return (
         <div id={styling.ArticlePage}>
-            
-                {
-                    articles &&
-                    articles.map((article, index) =>
-                    (<Article
-                        image={article.image}
-                        title={article.title}
-                        date={article.date}
-                        content={article.content}
-                        author={article.author}
-                        key={index}
-                    />)
-                    )
-                }
 
-            <h1>Done</h1>
+            {
+                articles &&
+                articles.map((article, index) =>
+                (<Article
+                    image={article.image}
+                    title={article.title}
+                    date={article.date}
+                    content={article.content}
+                    author={article.author}
+                    key={index}
+                    onDetail={onDetail}
+                    changeOnDetail = {setOnDetail}
+                    articleId = {article.article_id}
+                />)
+                )
+            }
         </div>
     )
 }
