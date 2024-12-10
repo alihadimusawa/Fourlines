@@ -47,7 +47,7 @@
 }
 
 #topImageContainer:hover #backIcon{
-    margin-left: -2vw;
+    margin-left: -1vw;
 }
 
 #addressIcon{
@@ -108,10 +108,9 @@
     border: 0px;
     width: 6vw;
     height: 10vh;
-    background-color: #CF9F51;
     border-radius: 10px;
-    border: 1px solid white;
-    color: white;
+    background-color: transparent;
+    color: #252B69;
     font-size: 4vw;
     transition: 0.3s;
     cursor: pointer;
@@ -245,6 +244,7 @@
 
 .price p{
     font-size: 1.2vw;
+    font-weight: 100 !important;
 }
 
 

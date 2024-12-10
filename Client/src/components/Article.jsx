@@ -15,7 +15,7 @@ function Article(props) {
     return (
         <div className={styling.article}>
             <div className={styling.imageContainer}>
-                <img src={props.image} alt="Article Image" />
+                <img src={props.image} alt="Article Image" id={styling.mainImage} />
             </div>
             <div className={styling.contentContainer}>
                 <h3>{props.title}</h3>

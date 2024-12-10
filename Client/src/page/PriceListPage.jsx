@@ -150,6 +150,7 @@ function PriceListPage() {
 
   function searchClicked() {
     setListOfHotels(searchResult);
+
   }
 
   useEffect(() => {
@@ -186,13 +187,17 @@ function PriceListPage() {
       <div className={PriceListStyling.top}>
 
         {/* Search Button */}
-        <div className={PriceListStyling.searchBar}>
+        <div className={PriceListStyling.searchBar} onKeyDown={(event) => {
+            if (event.key === "Enter") {
+              setInput("");
+              searchClicked();
+            }
+          }}>
           <input placeholder='Search...' value={searchInput} onChange={() => changeInput(event)} />
           <div id={PriceListStyling.searchBarRight} onClick={() => {
             setInput("");
             searchClicked();
-          }
-          }>
+          }}>
             <img src="http://localhost:3000/Icon/searchIcon.png" alt="" id={PriceListStyling.searchImage} />
           </div>
         </div>

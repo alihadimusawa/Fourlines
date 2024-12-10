@@ -19,9 +19,15 @@
     border-radius: 10px;
 }
 
-.article img {
+.article img{
     width: 100%;
     height: auto;
+}
+
+#mainImage{
+    width: auto !important;
+    height: 100% !important;
+    object-fit: cover !important;
 }
 
 .article div {
