@@ -1,46 +1,48 @@
-body{
+body {
     margin: 0;
     padding: 0;
 }
 
 body::-webkit-scrollbar {
     display: none;
-  }
-
-
-* {
-  font-family: "Rubik", serif;
-  font-weight: 0 !important;
-  font-style: normal;
 }
 
-.content{
+* {
+    font-family: "Rubik", serif;
+    font-weight: 0 !important;
+    font-style: normal;
+}
+
+.content {
     padding-left: 5vw;
     padding-right: 5vw;
 }
 
-.bold{
+.bold {
     font-weight: 900;
 }
 
-.light{
+.light {
     font-weight: 100;
 }
 
-#pagination{
+#pagination {
     width: fit-content;
     display: flex;
     gap: 1vw;
     margin: auto;
 }
 
-button{cursor: pointer;}
+button {
+    cursor: pointer;
+}
 
 /* ------- Dropwdown ------- */
-.dropdown{
+.dropdown {
     display: inline-block;
 }
-.dropdown button{
+
+.dropdown button {
     width: 10vw !important;
     background-color: hsl(0, 0%, 0%);
     color: white;
@@ -49,12 +51,14 @@ button{cursor: pointer;}
     cursor: pointer;
     font-size: 1.2vw !important;
 }
-.dropdown p{
+
+.dropdown p {
     display: block;
-    color: black;   
+    color: black;
     padding: 10px 15px;
 }
-.dropdown .content{
+
+.dropdown .content {
     display: none;
     position: absolute;
     width: inherit;
@@ -62,14 +66,16 @@ button{cursor: pointer;}
     min-width: 100px;
     box-shadow: 2px 2px 5px hsla(0, 0%, 0%, 0.8);
 }
-.dropdown:hover .content{
+
+.dropdown:hover .content {
     display: block;
 }
-.dropdown:hover button{
+
+.dropdown:hover button {
     background-color: hsl(0, 0%, 70%);
 }
 
-.dropdown p:hover{
+.dropdown p:hover {
     background-color: hsl(0, 0%, 90%);
 }
 
@@ -79,9 +85,12 @@ button{cursor: pointer;}
 /* --------Pagination-------- */
 #pagination {
     display: flex;
-    flex-wrap: wrap; /* Enable wrapping */
-    width: 100%; /* Ensure it spans the container */
-    gap: 1vw; /* Add spacing between buttons */
+    flex-wrap: wrap;
+    /* Enable wrapping */
+    width: 100%;
+    /* Ensure it spans the container */
+    gap: 1vw;
+    /* Add spacing between buttons */
     margin: auto;
     justify-content: center;
     margin-right: auto;
@@ -99,7 +108,7 @@ button{cursor: pointer;}
     border-radius: 10px;
 }
 
-#pagination button:hover{
+#pagination button:hover {
     background-color: #252B69;
     color: white;
 }
@@ -107,18 +116,19 @@ button{cursor: pointer;}
 
 
 /* Social Media Container */
-.socialMediaContainer, .socialMediaContainer *{
+.socialMediaContainer,
+.socialMediaContainer * {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
 }
 
-.socialMediaContainer{
+.socialMediaContainer {
     width: 55%;
 }
 
-.socialMediaContainer button{
+.socialMediaContainer button {
     border: 0px;
     width: 10vw;
     height: 4vw;
@@ -130,24 +140,234 @@ button{cursor: pointer;}
     transition: 0.1s;
 }
 
-.socialMediaContainer button:hover{
+.socialMediaContainer button:hover {
     transition: 0.1s;
     font-size: 1.3vw;
 }
 
-.socialMediaContainer img{
+.socialMediaContainer img {
     width: 2.5vw;
     height: auto;
 }
 
-.whatsApp{
+.whatsApp {
     background-color: #24d366 !important;
 }
 
-.facebook{
+.facebook {
     background-color: #3c5997 !important;
 }
 
-.instagram{
-    background-color: #e53e5f!important;
+.instagram {
+    background-color: #e53e5f !important;
 }
+
+/* --------------------------Homepage-------------------------- */
+
+.Homepage {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#mainImage {
+    width: 100%;
+    object-fit: cover;
+}
+
+.absoluteContainer > * {
+    position: absolute;
+    color: #252B69;
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+}
+
+#logoFourlinesCut {
+    left: 5vw;
+    top: 25vh;
+    width: 5vw;
+    height: auto;
+}
+
+#logoAljuhani {
+    width: 5vw;
+    top: 27vh;
+    right: 5vw;
+}
+
+.absoluteContainer h1 {
+    font-size: 3vw;
+    top: 25vh;
+    left: 28.5vw;
+    font-weight: 300;
+}
+
+.absoluteContainer h2 {
+    top: 35vh;
+    left: 21vw;
+    font-size: 2vw;
+    font-weight: 200;
+}
+
+#inImageButton{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    padding: 0;
+    width: 16vw;
+    height: 7vh;
+    overflow: hidden;
+    background-color: rgba(255, 255, 255, 0.747);
+    border-radius: 10px;
+    top: 130vh;
+    right: 7vw;
+}
+
+#inImageButton *{
+    padding: 0;
+    margin: 0;
+}
+
+#inImageButton div{
+    width: 20%;
+    height: 100%;
+    border: 1px solid black; 
+    background-color: #252B69;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.2s;
+}
+
+
+#arrowRightIcon{
+    width: 2vw;
+}
+
+#inImageButton p{
+    width: 70%;
+    text-align: center;
+    font-size: 1.5vw;
+    transition: 0.2s;
+}
+
+#inImageButton:hover div{
+    width: 28%;
+    transition: 0.2s;
+}
+
+/* ---------------Services--------------- */
+.divHeading{
+    font-weight: 400;
+    font-size: 2vw;
+    color: #CF9F51;
+    margin: 10vh;
+}
+
+.servicesContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 70%;
+    height: auto;
+}
+
+.servicesContainer > div{
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: auto;
+}
+
+.servicesContainer h4{
+    font-size: 1.5vw;
+    margin: 0;
+    margin-bottom: 2vh;
+    font-weight: 400;
+}
+
+.servicesContainer img{
+    width: 100%;
+    height: 50vh;
+    object-fit: cover;
+    border-radius: 10px;
+
+}
+
+.servicesContainer p{
+    font-size: 1vw;
+}
+
+
+hr{
+    height: 0.2vh;
+    width: 80%;
+    background-color: #252b694f;
+    margin: 10vh;
+}
+
+
+/* ----------------------Canva poster---------------------- */
+#canva{
+    width: 40%;
+}
+
+
+
+
+
+/* ----------------------FAQ---------------------- */
+.faqContainer{
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#faq{
+    margin-top: 0;
+    margin-bottom: 2vh;
+}
+
+.faqContainer > h5{
+    font-size: 1.5vw;
+    font-weight: 400;
+    width: 100%;
+    margin: 1vh;
+    color: #CF9F51;
+}
+
+
+.faqContainer img{
+    width: 1.5vw;
+    height: auto;
+    margin-right: 1vw;
+}
+
+
+.faqContainer > div{
+    border-bottom: 1px solid #CF9F51;
+    padding-bottom: 1vh;
+    border-radius: 10px;
+    padding-left: 1vw;
+    padding-right: 1vw;
+    width: 100%;
+    font-size: 1vw;
+    margin-bottom: 2vh;
+}
+
+.questionContainer{
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+
