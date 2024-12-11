@@ -14,9 +14,11 @@
     margin-bottom: 0;
 }
 
-h1{
+.articleDetailPage h1{
     color: #252B69;
     text-align: center;
+    font-weight: 400;
+    font-size: 3vw;
 }
 
 .infoContainer{
@@ -26,6 +28,7 @@ h1{
     justify-content: space-between;
     align-items: center;
     width: 50%;
+    padding-right: 2vw;
     height: 3vh;
     margin-top: 1vh;
     padding-bottom: 0.5vh;
@@ -57,4 +60,24 @@ h1{
 .content{
     font-size: 1.3vw;
     line-height: 4vh;
+}
+
+.articleDetailPage button{
+    width: 13vw;
+    height: 5vh;
+    background-color: transparent;
+    border: 1px solid #252B69;
+    border-radius: 10px;
+    font-size: 1.2vw;
+    font-weight: 400;
+    background-color: #252B69;
+    color: white;
+    margin-top: 10vh;
+    transition: 0.2s;
+}
+
+.articleDetailPage button:hover{
+    background-color: white;
+    border: 1px solid #252B69;
+    color: #252B69;
 }

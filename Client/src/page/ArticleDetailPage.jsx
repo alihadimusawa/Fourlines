@@ -7,6 +7,11 @@ import styling from "../style/ArticleDetailPage.module.css";
 
 function ArticleDetail() {
     const { articleId } = useParams();
+    const navigate = useNavigate();
+
+    const goToArticlePage = () => {
+        navigate("/Articles");
+    }
 
     const [article, setArticle] = useState(null);
 
@@ -40,15 +45,16 @@ function ArticleDetail() {
     return (
         article &&
         <div className={styling.articleDetailPage}>
+
             <h1>
                 {article.title}
             </h1>
 
-            <img src={article.image} alt="Article Image" className={styling.mainImage}/>
+            <img src={article.image} alt="Article Image" className={styling.mainImage} />
 
             <div className={styling.infoContainer}>
                 <div>
-                    <img src="http://localhost:3000/icon/profileIcon.png" alt="profile icon" id={styling.profileIcon}/>
+                    <img src="http://localhost:3000/icon/profileIcon.png" alt="profile icon" id={styling.profileIcon} />
                     <p>{article.author}</p>
                 </div>
                 <div>
@@ -65,9 +71,13 @@ function ArticleDetail() {
                 </div>
             </div>
 
-            <p  className={styling.content}
+            <p className={styling.content}
                 dangerouslySetInnerHTML={{ __html: article.content.replace(/\n/g, "<br />") }}
             ></p>
+
+            <button onClick={goToArticlePage}>
+                Back
+            </button>
         </div>
 
 

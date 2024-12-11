@@ -47,7 +47,8 @@
 }
 
 .hotel_right_container p{
-    font-weight: 100;
+    font-weight: 200;
+    font-size: 1.1vw;
 }
 
 
@@ -56,6 +57,7 @@
     font-weight: 500;
     color: #252B69;
     text-align: center;
+    font-size:2vw;
 }
 
 .show button{
@@ -97,6 +99,7 @@
     border-bottom-right-radius: 10px;
     padding-left: 3vw;
     z-index: -1;
+    
 
     margin-left: -12vw;
     transition: margin-left 0.3s ease-in-out; /* Add smooth transition */
@@ -110,13 +113,11 @@
     left: 9vw;
 }
 
-
 .feature{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    font-weight: 500;
     color: white;
 }
 
@@ -126,7 +127,8 @@
 
 .feature div{
     margin-top: 0.5vh;
-    font-size: 1vw;
+    font-size: 0.8vw;
+    font-weight: 400;
 }
 
 .hotel_right_popup img{

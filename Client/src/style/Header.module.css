@@ -35,6 +35,7 @@
 .header a {
     color: white;
     font-weight: 400;
+    font-size: 1vw;
     padding: 10px;
     height: 70%;
     width: 7.5vw;
