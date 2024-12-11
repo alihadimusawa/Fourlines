@@ -92,6 +92,7 @@ header{
     width: 20vw;
     height: auto;
     border: none;
+    cursor: pointer;
 }
 
 .sidedowns{
