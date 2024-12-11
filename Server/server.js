@@ -159,6 +159,31 @@ app.get("/getArticleById/:articleId", async (req, res) => {
     res.send(article.rows);
 })
 
+
+app.get("/faq", async (req, res) => {
+    const faq = [
+        {
+            question: "Apa saja layanan yang ditawarkan oleh bisnis ini?",
+            answer: "Kami menyediakan layanan pengurusan dokumen keberangkatan, penyediaan hotel di Makkah dan Madinah, serta paket wisata Islami domestik (khususnya Indonesia Timur)"
+        }, {
+            question: "Apakah ada paket perjalanan yang dapat disesuaikan?",
+            answer: "Tentu, kami menyediakan opsi kustomisasi paket sesuai kebutuhan dan anggaran Anda."
+        }, {
+            question: "Dokumen apa saja yang diperlukan untuk Haji atau Umroh?",
+            answer: "Dokumen yang diperlukan meliputi paspor, visa, kartu vaksinasi, dan dokumen pendukung lainnya. Tim kami akan membantu Anda mengurus semuanya."
+        }, {
+            question: "Apakah hotel yang disediakan dekat dengan Masjidil Haram atau Masjid Nabawi?",
+            answer: "Hotel yang kami sediakan memiliki fasilitas seperti Wi-Fi, layanan makan, transportasi, dan kamar yang nyaman."
+        }, {
+            question: "Apakah tersedia layanan pendampingan selama perjalanan?",
+            answer: "Ya, kami menyediakan tim pendamping profesional untuk memastikan perjalanan Anda berjalan lancar."
+        },
+    ]
+
+    res.send(faq);
+})
+
+
 app.listen(port, () => {
     console.log(`App is listening on port ${port}`);
 })

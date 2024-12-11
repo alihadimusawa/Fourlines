@@ -320,8 +320,6 @@ hr{
 
 
 
-
-
 /* ----------------------FAQ---------------------- */
 .faqContainer{
     width: 70%;
@@ -329,19 +327,11 @@ hr{
     flex-direction: column;
     justify-content: center;
     align-items: center;
-}
-
-#faq{
-    margin-top: 0;
-    margin-bottom: 2vh;
-}
-
-.faqContainer > h5{
-    font-size: 1.5vw;
-    font-weight: 400;
-    width: 100%;
-    margin: 1vh;
-    color: #CF9F51;
+    border-bottom: 1px solid #CF9F51;
+    margin-top: 2vh;
+    border-radius: 10px;
+    padding-right: 2vw;
+    padding-left: 2vw;
 }
 
 
@@ -349,11 +339,11 @@ hr{
     width: 1.5vw;
     height: auto;
     margin-right: 1vw;
+    transition: 0.3s;
 }
 
 
 .faqContainer > div{
-    border-bottom: 1px solid #CF9F51;
     padding-bottom: 1vh;
     border-radius: 10px;
     padding-left: 1vw;
@@ -364,10 +354,37 @@ hr{
 }
 
 .questionContainer{
-
     display: flex;
     flex-direction: row;
     align-items: center;
+}
+
+.questionContainer:hover img{
+    transform: rotate(180deg) scaleX(-1);
+    transition: all 0.3s;
+
+}
+
+.answerContainer{
+    margin-top: -4%;
+    transition: all 0.5s;
+    color: gray;
+    display: none;
+    transform: 1s;
+}
+
+.answerContainer.visible {
+    display: block;
+    margin-top: -1%;
+    transform: 1s;
+}
+
+
+.expandButton{
+    font-size: 2vw;
+    margin-right: 2vw;
+    color: #CF9F51;
+    transform: 1s;
 }
 
 

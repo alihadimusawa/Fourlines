@@ -1,10 +1,34 @@
-import React from "react";
-
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 
 function Homepage() {
-    return (
+   
+    const [faq, setFaq] = useState(null);
+    const [selected, setSelected] = useState(null);
 
+    async function takeFaq  (){
+        const result = await axios.get("http://localhost:3000/faq")
+        setFaq(result.data);
+    }
+
+    function expandFaq(index){
+        if(selected == index){
+            setSelected(null);
+            return;
+        }
+
+        setSelected(index);
+    }
+
+
+    useEffect( () => {
+        takeFaq();
+    }, []);
+
+
+    return (
         <div className="Homepage">
+
             <img src="http://localhost:3000/image/makkah.jpg" alt="Makkah Image" id="mainImage" />
 
             <div className="absoluteContainer">
@@ -90,99 +114,22 @@ function Homepage() {
 
             <hr />
 
-            <div className="faqContainer">
-                <h3 className="divHeading" id="faq">FAQ</h3>
+            <h3 className="divHeading" style={{marginTop:"0px", fontWeight:"499"}}>FAQ</h3>
 
+            {
+                faq && faq.map((current, index) => (
 
-                <h5>Pertanyaan Umum</h5>
-
-                <div>
-                    <div className="questionContainer">
-                        <img src="http://localhost:3000/icon/arrowDown.png" alt="Arrow Down Icon" />
-                        Apa saja layanan yang ditawarkan oleh bisnis ini?
+                    <div className="faqContainer" key={index}>
+                        <div className="questionContainer" onClick={() => expandFaq(index)}>
+                            <span className="expandButton">{selected == index ? "-" : "+"}</span>
+                            {current.question}
+                        </div>
+                        <div className={selected == index ? "answerContainer visible" : "answerContainer"}>
+                            {current.answer}
+                        </div>
                     </div>
-                    <div className="answerContainer">
-                        Kami menyediakan layanan pengurusan dokumen keberangkatan, penyediaan hotel di Makkah dan Madinah, serta paket wisata Islami domestik (khususnya Indonesia Timur).
-                    </div>
-                </div>
-
-                <div>
-                    <div className="questionContainer">
-                        <img src="http://localhost:3000/icon/arrowDown.png" alt="Arrow Down Icon" />
-                        Apakah ada paket perjalanan yang dapat disesuaikan?
-                    </div>
-                    <div className="answerContainer">
-                        Tentu, kami menyediakan opsi kustomisasi paket sesuai kebutuhan dan anggaran Anda.
-                    </div>
-                </div>
-
-                <h5>Pengurusan Dokumen</h5>
-
-                <div>
-                    <div
-                        className="questionContainer">
-                        <img src="http://localhost:3000/icon/arrowDown.png" alt="Arrow Down Icon" />
-                        Dokumen apa saja yang diperlukan untuk Haji atau Umroh?
-                    </div>
-                    <div className="answerContainer">
-                        Dokumen yang diperlukan meliputi paspor, visa, kartu vaksinasi, dan dokumen pendukung lainnya. Tim kami akan membantu Anda mengurus semuanya.
-                    </div>
-                </div>
-
-                <div>
-                    <div className="questionContainer">
-                        <img src="http://localhost:3000/icon/arrowDown.png" alt="Arrow Down Icon" />
-                        Berapa lama proses pengurusan dokumen?
-                    </div>
-                    <div className="answerContainer">
-                        Prosesnya bergantung pada kelengkapan dokumen Anda, biasanya memakan waktu 2–4 minggu.
-                    </div>
-                </div>
-
-                <h5>Layanan Hotel</h5>
-
-                <div>
-                    <div className="questionContainer">
-                        <img src="http://localhost:3000/icon/arrowDown.png" alt="Arrow Down Icon" />
-                        Apakah hotel yang disediakan dekat dengan Masjidil Haram atau Masjid Nabawi?
-                    </div>
-                    <div className="answerContainer">
-                        Ya, kami bekerja sama dengan hotel-hotel yang berlokasi strategis untuk memudahkan ibadah Anda.
-                    </div>
-                </div>
-
-                <div>
-                    <div className="questionContainer">
-                        <img src="http://localhost:3000/icon/arrowDown.png" alt="Arrow Down Icon" />
-                        Apa saja fasilitas yang tersedia di hotel?
-                    </div>
-                    <div className="answerContainer">
-                        Hotel yang kami sediakan memiliki fasilitas seperti Wi-Fi, layanan makan, transportasi, dan kamar yang nyaman.
-                    </div>
-                </div>
-
-                <h5>Lain-lain</h5>
-
-                <div>
-                    <div className="questionContainer">
-                        <img src="http://localhost:3000/icon/arrowDown.png" alt="Arrow Down Icon" />
-                        Bagaimana jika terjadi perubahan jadwal keberangkatan?
-                    </div>
-                    <div className="answerContainer">
-                        Kami akan membantu menyesuaikan jadwal dan memberikan informasi terbaru sesuai kebijakan yang berlaku.
-                    </div>
-                </div>
-
-                <div >
-                    <div className="questionContainer">
-                        <img src="http://localhost:3000/icon/arrowDown.png" alt="Arrow Down Icon" />
-                        Apakah tersedia layanan pendampingan selama perjalanan?
-                    </div>
-                    <div className="answerContainer">
-                        Ya, kami menyediakan tim pendamping profesional untuk memastikan perjalanan Anda berjalan lancar.
-                    </div>
-                </div>
-            </div>
+                ))
+            }
         </div>
     )
 }
