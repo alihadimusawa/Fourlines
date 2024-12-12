@@ -214,6 +214,7 @@ button {
 
 #inImageButton{
     display: flex;
+    border: none;
     justify-content: space-between;
     align-items: center;
     flex-direction: row;
@@ -223,8 +224,9 @@ button {
     overflow: hidden;
     background-color: rgba(255, 255, 255, 0.747);
     border-radius: 10px;
-    top: 130vh;
+    top: 90vh;
     right: 7vw;
+    transition: 0.2s;
 }
 
 #inImageButton *{
@@ -257,6 +259,11 @@ button {
 
 #inImageButton:hover div{
     width: 28%;
+    transition: 0.2s;
+}
+
+#inImageButton:hover{
+    background-color: white;
     transition: 0.2s;
 }
 
