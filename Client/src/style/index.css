@@ -172,6 +172,7 @@ button {
 }
 
 #mainImage {
+    height:90vh;
     width: 100%;
     object-fit: cover;
 }
@@ -186,26 +187,26 @@ button {
 
 #logoFourlinesCut {
     left: 5vw;
-    top: 25vh;
+    top: 15vh;
     width: 5vw;
     height: auto;
 }
 
 #logoAljuhani {
     width: 5vw;
-    top: 27vh;
+    top: 17vh;
     right: 5vw;
 }
 
 .absoluteContainer h1 {
     font-size: 3vw;
-    top: 25vh;
+    top: 12vh;
     left: 28.5vw;
     font-weight: 300;
 }
 
 .absoluteContainer h2 {
-    top: 35vh;
+    top: 22vh;
     left: 21vw;
     font-size: 2vw;
     font-weight: 200;

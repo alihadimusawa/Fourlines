@@ -6,13 +6,21 @@
 }
 
 .header{
-
+    position: sticky;
+    top: 0;
     justify-content: center;
     align-items: center;
     width: 100%;
     height: 10vh;
     background-color: #252B69;
-    margin-bottom: 10vh;
+    
+    transition: background-color 0.3s ease; /* Smooth transition */
+    z-index: 1000;
+
+}
+
+.header.scrolled{
+    background-color: #252b69;
 }
 
 .right{
@@ -35,7 +43,7 @@
 .header a {
     color: white;
     font-weight: 400;
-    font-size: 1vw;
+    font-size: 1.2vw;
     padding: 10px;
     height: 70%;
     width: 7.5vw;
@@ -78,7 +86,6 @@
 }
 
 header{
-
     justify-content: center;
     align-items: center;
     width: 90%;
@@ -87,7 +94,6 @@ header{
 }
 
 .header img{
-
     justify-content: center;
     align-items: center;
     width: 20vw;
