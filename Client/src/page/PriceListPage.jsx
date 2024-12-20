@@ -154,8 +154,8 @@ function PriceListPage() {
   }
 
   useEffect(() => {
-    if (!searchInput || listOfHotels.length <= 0) {
-      setSearchResults([]);
+    if (searchInput == "" || listOfHotels.length <= 0) {
+      setSearchResults(listOfHotelsCopy);
       return;
     }
 
@@ -193,7 +193,7 @@ function PriceListPage() {
               searchClicked();
             }
           }}>
-          <input placeholder='Search...' value={searchInput} onChange={() => changeInput(event)} />
+          <input placeholder='Search...' value={searchInput} onChange={(event) => changeInput(event)} />
           <div id={PriceListStyling.searchBarRight} onClick={() => {
             setInput("");
             searchClicked();

@@ -257,7 +257,7 @@ function HotelDescriptionPage() {
 
             {/* -------- DESCRIPTION AND SECONDARY SERVICE -------- */}
             <div className={styling.content}>
-
+                
                 {hotel &&
                     <p
                         className={styling.description}

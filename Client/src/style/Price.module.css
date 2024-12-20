@@ -28,7 +28,7 @@
 
 .categoryDropdowns{
     position: absolute;
-    top: 25vh;
+    top: 20vh;
     border-radius: 20px;
     width: 8.8vw;
     border-top-right-radius: 0px;
@@ -153,5 +153,3 @@
 textarea:focus, input:focus{
     outline: none;
 }
-
-

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import gsap from "gsap";
 
 function Homepage() {
    
@@ -21,27 +22,66 @@ function Homepage() {
     }
 
 
-    useEffect( () => {
+    useEffect(() => {
         takeFaq();
+
+        // GSAP animation for the mainContainer
+        gsap.from(".mainContainer", {
+                opacity: 0,
+                duration: 1,
+                ease: "power3.out",
+            })
+            gsap.from(".absoluteContainer", {
+                opacity: 0,
+                delay: 0.2,
+                duration: 1,
+                ease: "power3.out",
+            })
+            gsap.from(".absoluteContainer > h1", {
+                opacity: 0,
+                delay: 1,
+                duration: 1,
+                ease: "power3.out",
+            })
+            gsap.from(".absoluteContainer > h2", {
+                opacity: 0,
+                delay: 1.2,
+                duration: 1,
+                ease: "power3.out",
+            })
+            gsap.from(".absoluteContainer > img", {
+                opacity: 0,
+                delay: 1.5,
+                duration: 1,
+                ease: "power3.out",
+            })
+            gsap.from("#inImageButton", {
+                opacity: 0,
+                delay: 3,
+                duration: 1,
+                ease: "power3.out",
+            })
     }, []);
 
 
     return (
         <div className="Homepage">
 
+            <div className="mainContainer">
             <img src="http://localhost:3000/image/makkah.jpg" alt="Makkah Image" id="mainImage" />
 
-            <div className="absoluteContainer">
-                <img src="http://localhost:3000/image/logoFourlinesCut.png" alt="Logo forulines" id="logoFourlinesCut" />
-                <img src="http://localhost:3000/image/logoAljuhani.png" alt="logo al juhani" id="logoAljuhani" />
-                <h1>Umroh / Haji Bersama Fourlines</h1>
-                <h2>Travel B2B yang Menyediakan Harga Hotel Terbaik di Indonesia</h2>
-                <button id="inImageButton">
-                    <p>OUR HOTELS</p>
-                    <div>
-                        <img src="http://localhost:3000/icon/arrowRightLight.png" alt="Arrow Right Icon" id="arrowRightIcon" />
-                    </div>
-                </button>
+<div className="absoluteContainer">
+    <img src="http://localhost:3000/image/logoFourlinesCut.png" alt="Logo forulines" id="logoFourlinesCut" />
+    <img src="http://localhost:3000/image/logoAljuhani.png" alt="logo al juhani" id="logoAljuhani" />
+    <h1>Umroh / Haji Bersama Fourlines</h1>
+    <h2>Travel B2B yang Menyediakan Harga Hotel Terbaik di Indonesia</h2>
+    <button id="inImageButton" onClick={() => window.location.href = "/hotels"}>
+        <p>Hotels</p>
+        <div>
+            <img src="http://localhost:3000/icon/arrowRightLight.png" alt="Arrow Right Icon" id="arrowRightIcon" />
+        </div>
+    </button>
+</div>
             </div>
 
             <h3 className="divHeading">SERVICES</h3>

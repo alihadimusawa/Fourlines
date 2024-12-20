@@ -38,7 +38,6 @@ function Header() {
                     <a href="/Articles">ARTICLE</a>
                     <a href="/Hotels" id={HeaderStyling.hotel}>HOTELS</a>
                     <a href="/AboutUs">ABOUT</a>
-                    <a href="/Admin">ADMIN</a>
                 </div>
             </header>
         </div>

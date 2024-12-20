@@ -6,7 +6,7 @@ function Price(props){
     return(
         <div className={styling.price}>
             <h5>{props.header}</h5>
-            <p>{props.price}</p>
+            <p>{props.price} ر.س</p>
         </div>
     )
 }
