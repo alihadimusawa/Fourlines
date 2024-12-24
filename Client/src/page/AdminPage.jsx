@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from "react";
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styling from "../style/AdminPage.module.css";
 import SearchBar from "../components/SearchBar";
 import axios from "axios";
 
 function AdminPage() {
-
-    const navigate = useNavigate();
-    function goToInsert(){
-        navigate("/Insert");
-    }
+  const navigate = useNavigate();
+  function goToInsert() {
+    navigate("/Insert");
+  }
 
   const [hotels, setHotels] = useState(null);
 
@@ -19,12 +18,10 @@ function AdminPage() {
     setHotels(result);
   }
 
-
   async function deleteHotels(hotelId) {
     let result = await axios.delete(`http://localhost:3000/hotels/${hotelId}`);
     fetchHotels();
   }
-  
 
   useEffect(() => {
     fetchHotels();
@@ -33,12 +30,14 @@ function AdminPage() {
   return (
     hotels && (
       <div className={styling.adminPage}>
-        <h1>DASHBOR ADMIN</h1>
-        <div className={styling.tableSelector} id={styling.hotelSelector}>
-          HOTEL
-        </div>
-        <div className={styling.tableSelector} id={styling.artikelSelector}>
-          ARTIKEL
+          <h1>DASHBOR ADMIN</h1>
+        <div className={styling.tableSelectorContainer}>
+          <div className={styling.tableSelector} id={styling.hotelSelector}>
+            HOTEL
+          </div>
+          <div className={styling.tableSelector} id={styling.artikelSelector}>
+            ARTIKEL
+          </div>
         </div>
 
         {/* inside the main square */}
@@ -68,14 +67,21 @@ function AdminPage() {
                   <td>{hotel.kamar}</td>
                   <td id={styling.manageButtonContainer}>
                     <button className={styling.editButton}>EDIT</button>
-                    <button className={styling.deleteButton} onClick={() => deleteHotels(hotel.hotel_id)} >DELETE</button>
+                    <button
+                      className={styling.deleteButton}
+                      onClick={() => deleteHotels(hotel.hotel_id)}
+                    >
+                      DELETE
+                    </button>
                   </td>
                 </tr>
               ))}
             </tbody>
           </table>
 
-          <button className={styling.addButton} onClick={goToInsert}>ADD HOTEL</button>
+          <button className={styling.addButton} onClick={goToInsert}>
+            ADD HOTEL
+          </button>
         </div>
       </div>
     )

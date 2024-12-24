@@ -17,9 +17,17 @@
     width: 100%;
 }
 
+.tableSelectorContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 15vw;
+    margin-bottom: -10vh;
+    margin-left: -55.2vw;
+}
+
 .tableSelector{
-    position: absolute;
-    top: 20vh;
     border: 2px solid black ;
     width: 6vw;
     height: 3vh;
