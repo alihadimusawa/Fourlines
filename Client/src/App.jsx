@@ -4,6 +4,7 @@ import AboutUsPage from './page/AboutUsPage';
 import HotelDescriptionPage from './page/HotelDescriptionPage';
 import ArticleDetailPage from './page/ArticleDetailPage';
 import Homepage from './page/Homepage';
+import AdminPage from './page/AdminPage';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -12,6 +13,7 @@ import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 import ArticlePage from './page/ArticlePage';
+import InsertHotelPage from './page/InsertHotelPage';
 
 function App() {
 
@@ -26,6 +28,8 @@ function App() {
                 <Route path='/AboutUs' element={<AboutUsPage />} />
                 <Route path='/Articles' element={<ArticlePage />} />
                 <Route path='/articleDetail/:articleId' element={<ArticleDetailPage />} />
+                <Route path='/Admin' element={<AdminPage />}></Route>
+                <Route path='/insert' element={<InsertHotelPage/>}></Route>
             </Routes>
 
             <Footer />

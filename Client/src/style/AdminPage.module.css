@@ -1,0 +1,246 @@
+.adminPage{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 70%;
+    margin: auto;
+}
+
+.adminPage h1{
+    margin-top: 10vh;
+}
+
+.mainSquare{
+    margin-top: 10vh;
+    border: 2px solid black;
+    width: 100%;
+}
+
+.tableSelector{
+    position: absolute;
+    top: 20vh;
+    border: 2px solid black ;
+    width: 6vw;
+    height: 3vh;
+    padding-top: 1vh;
+    text-align: center;
+    border-radius: 20px;
+    font-size: 1vw;
+    border-bottom-left-radius:0px ;
+    border-bottom-right-radius:0px ;
+    top: 33vh;
+    background-color: #252B69;
+    color: white;
+    transition: 0.2s;
+    cursor: pointer;
+}
+
+.tableSelector:hover{
+    transition: 0.2s;
+    background-color: white;
+    color: black;
+}
+
+#artikelSelector{
+    left: 23vw;
+}
+
+
+#hotelSelector{
+    left: 14.9vw;
+}
+
+.mainSquare{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 5vh;
+    padding-bottom: 5vh;
+}
+
+.searchBar{
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border-radius: 15px;
+    overflow: hidden;
+    border: 1px solid black;
+    padding-left: 1vw;
+    margin-bottom: 5vh;
+    height: 4vh;
+}
+
+.searchBar input{
+    width: 90%;
+    background-color: white;
+    height: 4vh;
+    border: 0px;
+}
+
+.searchBar div{
+    width: 10%;
+    background-color: #252B69;
+    height: 5.1vh !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+.searchBar img{
+    width: 1.5vw;
+    background-color: #252B69;
+    height: auto;
+}
+
+
+
+/* TABLE CONTAINER */
+table{
+    border: 1px solid black;
+    background-color: black;
+    margin-bottom: 10vh;
+}
+
+.adminPage table{
+    width: 81%;;
+}
+
+ tr *{
+    height: 6vh;
+}
+
+tr{
+    text-align: center;
+}
+
+th{
+    background-color: #CF9F51;
+}
+
+td{
+    background-color: white;
+}
+
+#manageButtonContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.adminPage button,.insertHotelPage button{
+    width: 5vw;
+    height: 4vh;
+    border-radius: 30px;
+    border: 0px;
+    color: white;
+    transition: 0.2s;   
+}
+
+.adminPage button:hover,.insertHotelPage button:hover{
+    border-radius: 10px;
+    transition: 0.2s;   
+}
+
+.editButton{
+    background-color: #6C757D;
+}
+
+.deleteButton{
+    background-color: #DC3545;
+}
+
+.addButton{
+    background-color: #2C6EE1;
+    width: 6vw !important;
+}
+
+
+
+/* --------------------------- */
+/* ADMIN PAGE INSERT STYLING */
+
+.insertHotelPage{
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+}
+
+.insertHotelPage form{
+    width: 100%;
+}
+
+.insertHotelPage input:not(.inputContainer input){
+    width: 100%;
+    height: 3vh;
+}
+
+.insertHotelPage h5{
+    width: 100%;
+    text-align: left;
+    margin-bottom: 1vh;
+}
+
+.insertHotelPage textarea{
+    width: 100%;
+}
+
+.inputContainer{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.inputContainer *{
+    width: 5vw;
+}
+
+.insertHotelPage table{
+    width: 100% !important;
+    margin-top: 5vh;
+    margin-bottom:5vh ;
+}
+
+#priceForm{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#priceForm input{
+    height: 5vh;
+    width: 7vw;
+    border: transparent;
+    font-size: 0.8vw;
+}
+
+#imageForm{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#imageFormManage{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+
+#linkContainer{
+    width: 80%;
+}
+
+

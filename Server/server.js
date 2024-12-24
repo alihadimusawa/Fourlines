@@ -60,13 +60,36 @@ app.get("/icon/:iconName", (req, res) => {
 })
 
 
-
 // Get hotels
 app.get("/hotels", async (req, res) => {
     let hotels = await db.query("SELECT * FROM hotels");
     console.log("getting all the hotels from the backend is triggered")
     res.send(hotels);
 });
+
+
+// Delete hotel by its id
+app.delete("/hotels/:hotel_id", async (req, res) => {
+    const hotelId = req.params.hotel_id;
+
+    try {
+        // Query to delete the hotel by its ID
+        const result = await db.query("DELETE FROM hotels WHERE hotel_id = $1 RETURNING *;", [hotelId]);
+
+        if (result.rowCount === 0) {
+            // No hotel found with the given ID
+            res.status(404).send({ success: false, message: "Hotel not found." });
+        } else {
+            // Hotel deleted successfully
+            console.log(`Hotel with ID ${hotelId} deleted.`);
+            res.send({ success: true, message: `Hotel with ID ${hotelId} deleted successfully.`, data: result.rows[0] });
+        }
+    } catch (error) {
+        console.error("Error deleting hotel:", error);
+        res.status(500).send({ success: false, message: "An error occurred while deleting the hotel." });
+    }
+});
+
 
 
 
@@ -76,6 +99,26 @@ app.get("/prices", async (req, res) => {
     console.log("hotel prices for particular date in the backend is triggered");
     res.send(prices);
 })
+
+// Get Hotel Image by Id
+app.post("/getHotelImageById/:hotel_id", async (req, res) => {
+    const hotel_id = req.params.hotel_id;
+    let hotel;
+
+    hotel = await db.query(`
+        SELECT 
+            images.image
+        FROM 
+            images
+        JOIN 
+            hotels ON images.hotel_id = hotels.hotel_id
+        WHERE 
+            hotels.hotel_id = $1;`, [hotel_id])
+
+    console.log("hotel images backend triggerred");
+    res.send(hotel.rows);
+})
+
 
 
 
@@ -117,27 +160,6 @@ app.post("/getHotelPrices/:hotel_id", async (req, res) => {
         `, [hotel_id])
 
     console.log("hotel prices backend triggerred");
-    res.send(hotel.rows);
-})
-
-
-
-// Get hotel images by id
-app.post("/getHotelImageById/:hotel_id", async (req, res) => {
-    const hotel_id = req.params.hotel_id;
-    let hotel;
-
-    hotel = await db.query(`
-        SELECT 
-            images.image
-        FROM 
-            images
-        JOIN 
-            hotels ON images.hotel_id = hotels.hotel_id
-        WHERE 
-            hotels.hotel_id = $1;`, [hotel_id])
-
-    console.log("hotel images backend triggerred");
     res.send(hotel.rows);
 })
 
