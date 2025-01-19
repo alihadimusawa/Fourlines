@@ -140,7 +140,7 @@ td{
     align-items: center;
 }
 
-.adminPage button,.insertHotelPage button{
+form button, .adminPage button,.insertHotelPage button{
     width: 5vw;
     height: 4vh;
     border-radius: 30px;
@@ -149,7 +149,7 @@ td{
     transition: 0.2s;   
 }
 
-.adminPage button:hover,.insertHotelPage button:hover{
+form button:hover, .adminPage button:hover,.insertHotelPage button:hover{
     border-radius: 10px;
     transition: 0.2s;   
 }
@@ -165,6 +165,11 @@ td{
 .addButton{
     background-color: #2C6EE1;
     width: 6vw !important;
+    align-self: center !important;
+}
+
+.insertHotelPage .addButton{
+    margin-top: 10vh;
 }
 
 
@@ -183,6 +188,10 @@ td{
 
 .insertHotelPage form{
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .insertHotelPage input:not(.inputContainer input){
@@ -251,4 +260,25 @@ td{
     width: 80%;
 }
 
+#priceForm table, #imageForm table{
+    width: 60vw !important;
+}
 
+#imageForm input{
+    width: 95%;
+    border: transparent;
+    height: 4vh !important;
+    overflow: hidden;
+}
+
+#imageForm tr{
+    height: fit-content;
+}
+
+#imageFormManage{
+    height: 8vh;
+}
+
+#imageFormManage button, #manageButtonContainer button{
+    width: 5vw !important;
+}

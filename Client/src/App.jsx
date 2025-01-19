@@ -14,6 +14,9 @@ import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 import ArticlePage from './page/ArticlePage';
 import InsertHotelPage from './page/InsertHotelPage';
+import InsertPriceImage from './page/InsertPriceImage';
+import AdminArticle from './page/AdminArticle';
+import InsertArticle from './page/InsertArticle';
 
 function App() {
 
@@ -30,6 +33,9 @@ function App() {
                 <Route path='/articleDetail/:articleId' element={<ArticleDetailPage />} />
                 <Route path='/Admin' element={<AdminPage />}></Route>
                 <Route path='/insert' element={<InsertHotelPage/>}></Route>
+                <Route path="/InsertPriceImage/hotelId" element={<InsertPriceImage/>}></Route>
+                <Route path='/AdminArticle' element={<AdminArticle/>}></Route>
+                <Route path='/InsertArticle' element={<InsertArticle/>}></Route>
             </Routes>
 
             <Footer />

@@ -9,6 +9,18 @@ function AdminPage() {
   function goToInsert() {
     navigate("/Insert");
   }
+  
+  function goToInsertPriceImage(hotelId){
+    navigate(`/InsertPriceImage/${hotelId}`);
+  }
+  
+  function goToAdminHotel(){
+    navigate(`/Admin`);
+  }
+
+  function goToAdminArticle(){
+    navigate(`/AdminArticle`);
+  }
 
   const [hotels, setHotels] = useState(null);
 
@@ -32,19 +44,21 @@ function AdminPage() {
       <div className={styling.adminPage}>
           <h1>DASHBOR ADMIN</h1>
         <div className={styling.tableSelectorContainer}>
-          <div className={styling.tableSelector} id={styling.hotelSelector}>
+          <div
+          style={{
+            backgroundColor:"white",
+            color:"#252B69"
+        }} 
+          className={styling.tableSelector} onClick={goToAdminHotel} id={styling.hotelSelector}>
             HOTEL
           </div>
-          <div className={styling.tableSelector} id={styling.artikelSelector}>
+          <div className={styling.tableSelector} id={styling.artikelSelector} onClick={goToAdminArticle}>
             ARTIKEL
           </div>
         </div>
 
         {/* inside the main square */}
-
         <div className={styling.mainSquare}>
-          <SearchBar />
-
           <table>
             <thead>
               <tr>
@@ -66,7 +80,7 @@ function AdminPage() {
                   <td>{hotel.rating}</td>
                   <td>{hotel.kamar}</td>
                   <td id={styling.manageButtonContainer}>
-                    <button className={styling.editButton}>EDIT</button>
+                    <button className={styling.editButton} onClick={()=> goToInsertPriceImage(hotel.hotel_id)}>EDIT</button>
                     <button
                       className={styling.deleteButton}
                       onClick={() => deleteHotels(hotel.hotel_id)}

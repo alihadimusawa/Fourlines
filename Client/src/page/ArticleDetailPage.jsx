@@ -59,7 +59,7 @@ function ArticleDetail() {
                 </div>
                 <div>
                     <img src="http://localhost:3000/icon/calendarIcon.png" alt="calendar icon" />
-                    <p>{article.time}</p>
+                    <p>{article.date}</p>
                 </div>
                 <div>
                     <img src="http://localhost:3000/icon/timeIcon.png" alt="time icon" />

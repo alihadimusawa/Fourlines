@@ -1,4 +1,7 @@
 import styling from "../style/AdminPage.module.css";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 export default function InsertHotelPage() {
   const ratingOptions = [1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5];
@@ -7,16 +10,107 @@ export default function InsertHotelPage() {
     { value: false, label: "false" },
   ];
 
+  const navigate = useNavigate();
+
+  const goToInsertPriceImage = (hotelId) => {
+    navigate(`/InsertPriceImage/${hotelId}`);
+  }
+
+// Below are for inserting price
+  async function validateHotelInput(event) {
+    event.preventDefault();
+
+    const form = event.target.closest("form");
+    const formData = new FormData(form);
+
+    const hotelName = formData.get("name");
+    const hotelAddress = formData.get("alamat");
+    const hotelDescription = formData.get("deskripsi");
+    const hotelRating = formData.get("rating");
+    const hotelRoom = formData.get("kamar");
+    const hotelDistance = formData.get("jarak");
+    const hotelAllotment = formData.get("allotment");
+    const hotelSpecial = formData.get("special");
+    const hotelGym = formData.get("gym");
+    const hotelLaundry = formData.get("laundry");
+    const hotelCafe = formData.get("cafe");
+    const hotelWifi = formData.get("wifi");
+    const hotelBreakfast = formData.get("breakfast");
+    const hotelPool = formData.get("pool");
+    const hotelImage = formData.get("gambar");
+    const hotelRestaurant = formData.get("restaurant");
+
+    // Array of field names and values for validation
+    const fields = [
+      { name: "Nama hotel", value: hotelName },
+      { name: "Alamat hotel", value: hotelAddress },
+      { name: "Deskripsi hotel", value: hotelDescription },
+      { name: "Rating hotel", value: hotelRating },
+      { name: "Jumlah kamar", value: hotelRoom },
+      { name: "Jarak hotel", value: hotelDistance },
+      { name: "Allotment hotel", value: hotelAllotment },
+      { name: "Special hotel", value: hotelSpecial },
+      { name: "Fasilitas gym", value: hotelGym },
+      { name: "Fasilitas laundry", value: hotelLaundry },
+      { name: "Fasilitas cafe", value: hotelCafe },
+      { name: "Fasilitas wifi", value: hotelWifi },
+      { name: "Fasilitas sarapan", value: hotelBreakfast },
+      { name: "Fasilitas kolam renang", value: hotelPool },
+      { name: "Gambar hotel", value: hotelImage },
+      { name: "Restoran hotel", value: hotelRestaurant },
+    ];
+
+    // Validate each field
+    for (const field of fields) {
+      if (!field.value) {
+        alert(`Tolong lengkapi ${field.name}`);
+        return; // Stop execution if a field is missing
+      }
+    }
+
+    try {
+      const response = await axios.post("http://localhost:3000/addHotel", {
+        hotelName,
+        hotelAddress,
+        hotelDescription,
+        hotelRating,
+        hotelRoom,
+        hotelDistance,
+        hotelAllotment,
+        hotelSpecial,
+        hotelGym,
+        hotelLaundry,
+        hotelCafe,
+        hotelWifi,
+        hotelBreakfast,
+        hotelPool,
+        hotelImage,
+        hotelRestaurant
+      });
+      goToInsertPriceImage(response.data.hotelId);
+      return;
+    } catch (error) {
+      console.error("Error sbumitting hotel: ", error); 
+      alert("Gagal untuk menambahkan hotel ke dalam database");
+      return; 
+    }
+  }
+
+
+
   return (
     <div className={styling.insertHotelPage}>
       <h1>INSERT HOTEL</h1>
 
-      <form action="POST">
+      <form>
         <h5>Nama Hotel</h5>
         <input type="text" name="name" id="name" />
 
         <h5>Alamat</h5>
         <input type="text" name="alamat" id="alamat" />
+        
+        <h5>Gambar Utama</h5>
+        <input type="text" name="gambar" id="gambar" />
 
         <h5>Deskripsi hotel</h5>
         <textarea id="deskripsi" name="deskripsi" rows="10" cols="50" />
@@ -136,82 +230,13 @@ export default function InsertHotelPage() {
           </div>
         </div>
 
-        <form action="POST" id={styling.imageForm}>
-          <h5>Add Image</h5>
-          <table>
-            <thead>
-              <tr>
-                <th id={styling.linkContainer}>Link Gambar</th>
-                <th>Manage</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td id={styling.linkContainer}>Contoh Link</td>
-                <td id={styling.imageFormManage}>
-                  <button className={styling.editButton}>EDIT</button>
-                  <button
-                    className={styling.deleteButton}
-                    onClick={() => deleteHotels(hotel.hotel_id)}
-                  >
-                    DELETE
-                  </button>
-
-                </td>
-              </tr>
-            </tbody>
-          </table>
-
-          <button className={styling.addButton}>ADD IMAGE</button>
-        </form>
-
-        <form action="POST" id={styling.priceForm}>
-          <table>
-            <thead>
-              <tr>
-                <th>Mulai</th>
-                <th>Akhir</th>
-                <th>Double</th>
-                <th>Triple</th>
-                <th>Quad</th>
-                <th>Quint</th>
-                <th>Manage</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>
-                  <input type="date" name="start_date" />
-                </td>
-                <td>
-                  <input type="date" name="end_date" />
-                </td>
-                <td>
-                  <input type="number" name="double_price" step="1" min="0" />
-                </td>
-                <td>
-                  <input type="number" name="triple_price" step="1" min="0" />
-                </td>
-                <td>
-                  <input type="number" name="quad_price" step="1" min="0" />
-                </td>
-                <td>
-                  <input type="number" name="quint_price" step="1" min="0" />
-                </td>
-                <td id={styling.manageButtonContainer}>
-                  <button className={styling.editButton}>EDIT</button>
-                  <button
-                    className={styling.deleteButton}
-                    onClick={() => deleteHotels(hotel.hotel_id)}
-                  >
-                    DELETE
-                  </button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-          <button className={styling.addButton}>CONFIRM</button>
-        </form>
+        <button
+          className={styling.addButton}
+          onClick={validateHotelInput}
+          id={styling.confirmButton}
+        >
+          ADD HOTEL
+        </button>
       </form>
     </div>
   );
