@@ -62,10 +62,19 @@ You'll need two terminals:
 ✅ **No setup needed**—the `.env` file is already included in the project.  
 
 ### 📷 Screenshots  
+#### Part of the homepage
 ![homepage](https://github.com/user-attachments/assets/947803f6-ab33-4b24-8472-ee5d3cbad6bc)
+
+#### Admin dashboard page
 ![dashboard admin](https://github.com/user-attachments/assets/0516fc76-bb40-4e1f-abd6-5411ed4657f5)
+
+#### Hotel page
 ![hotel](https://github.com/user-attachments/assets/84548740-4f03-4da5-afa1-0ccac7db944e)
+
+#### Hotel hover effect
 ![hotel hover](https://github.com/user-attachments/assets/f06c3d22-6aae-4660-8cf6-6e188778f051)
+
+#### Artcile page
 ![article page](https://github.com/user-attachments/assets/bf90b418-f8e7-4f18-867e-97dde3790b1e)
 
 
